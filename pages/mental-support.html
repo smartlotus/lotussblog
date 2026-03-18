@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻舟已过万重山</title>
+  <style>
+    @font-face {
+      font-family: Millik;
+      font-weight: 700;
+      src: url(../asset/font/Millik.c3f91cb.ttf) format("truetype");
+      text-rendering: optimizeLegibility;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Millik, Arial, sans-serif;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100svh;
+      background: #fff;
+      background-image: url(../asset/image/backgrounds/grid.svg);
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      color: #171717;
+    }
+
+    .support-wrap {
+      width: min(94vw, 1120px);
+      margin: 7vh auto;
+      padding: clamp(1.8rem, 2.4vw, 3rem);
+      border: 1px solid rgba(23, 23, 23, 0.22);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .support-title {
+      font-size: clamp(4.6rem, 8.6vw, 10.5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .support-copy p {
+      color: #6f6f6f;
+      font-size: clamp(1.35rem, 1.45vw, 1.9rem);
+      line-height: 1.9;
+    }
+
+    .support-copy p + p {
+      margin-top: 0.9rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-top: 1.8rem;
+      border: 1px solid #171717;
+      color: #171717;
+      text-decoration: none;
+      padding: 0.86rem 1.6rem;
+      font-size: 1.5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .back-link:hover {
+      background-color: #171717;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .support-wrap {
+        margin: 3.5vh auto 6vh;
+        padding: 1.6rem 1.2rem;
+      }
+
+      .support-title {
+        font-size: clamp(3.6rem, 12vw, 7rem);
+        margin-bottom: 1rem;
+      }
+
+      .support-copy p {
+        font-size: clamp(1.25rem, 3.8vw, 1.65rem);
+        line-height: 1.75;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="support-wrap" aria-label="心理援助信息全文">
+    <h1 class="support-title">轻舟已过万重山</h1>
+    <div class="support-copy">
+      <p>轻舟已过万重山</p>
+      <p>抑郁症是医学上经过严格定义的病症，本质上是一种疾病，而不是所谓的“过于敏感”、“抗压能力不足”。同时，只要积极治疗，抑郁症患者是能够正常生活的。</p>
+      <p>抑郁症患者是不幸的病人，他们的患病表现不一，请不要带有任何刻板印象。如果发现你身边的人有抑郁症倾向，请关心和理解他们。</p>
+      <p>如果你常常感到胸闷、心慌、乏力、头疼、肢体不受控抖动等，这些可能是抑郁症导致的躯体化症状，请及时就医并向身边人寻求帮助。你没有任何问题，你只是运气不好生了一场病，是你的生理功能出现了问题。</p>
+      <p>拥有什么样的念头都是正常的，无论如何，最后请再拨打一次全国统一心理援助热线：12356，他们一首都在，我们一直都在。</p>
+    </div>
+    <a class="back-link" href="../index.html">返回主页</a>
+  </section>
+</body>
+</html>
