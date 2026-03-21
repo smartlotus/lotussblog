@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pickplan - 把想法变成可执行计划</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #141414;
+      --muted: #545454;
+      --line: #ebebeb;
+      --card: #ffffff;
+      --accent: #101010;
+      --accent-2: #f3f3f3;
+      --radius: 18px;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      --container: min(1120px, 92vw);
+      --speed: 420ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right, rgba(20,20,20,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20,20,20,0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      line-height: 1.5;
+    }
+
+    .container { width: var(--container); margin: 0 auto; }
+
+    .hero {
+      padding: 68px 0 32px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-family: "Syne", sans-serif;
+      margin: 18px auto 14px;
+      font-size: clamp(2.1rem, 5.5vw, 4.3rem);
+      line-height: 1.02;
+      max-width: 980px;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.1vw, 1.15rem);
+    }
+    .cta-row {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform var(--speed), background var(--speed), color var(--speed);
+    }
+    .btn:hover { transform: translateY(-2px) scale(1.02); }
+    .btn.ghost {
+      background: #fff;
+      color: var(--accent);
+      border-color: #d9d9d9;
+    }
+
+    .showcase-wrap {
+      position: relative;
+      margin: 34px auto 0;
+      width: var(--container);
+      overflow: hidden;
+      border-radius: 22px;
+      -webkit-mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDE0NDAgNTAwIj48cGF0aCBmaWxsPSJibGFjayIgZD0iTTAgMFMyNzUgMTAwIDcyMCAxMDBzNzIwLTEwMCA3MjAtMTAwdjUwMHMtMjc1LTEwMC03MjAtMTAwUzAgNTAwIDAgNTAwVjB6Ii8+PC9zdmc+") center / 100% 100% no-repeat;
+      mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDE0NDAgNTAwIj48cGF0aCBmaWxsPSJibGFjayIgZD0iTTAgMFMyNzUgMTAwIDcyMCAxMDBzNzIwLTEwMCA3MjAtMTAwdjUwMHMtMjc1LTEwMC03MjAtMTAwUzAgNTAwIDAgNTAwVjB6Ii8+PC9zdmc+") center / 100% 100% no-repeat;
+      box-shadow: var(--shadow);
+      border: 1px solid #efefef;
+      background: #f9f9f9;
+    }
+    .showcase-track {
+      display: flex;
+      transition: transform var(--speed) ease;
+    }
+    .shot {
+      position: relative;
+      min-width: 100%;
+      aspect-ratio: 16 / 8.8;
+      overflow: hidden;
+    }
+    .shot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.02);
+    }
+    .shot .caption {
+      position: absolute;
+      left: 16px; bottom: 16px;
+      background: rgba(10,10,10,.68);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .showcase-controls {
+      margin: 14px auto 0;
+      width: var(--container);
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .circle-btn {
+      width: 48px; height: 48px;
+      border-radius: 999px;
+      border: 1px solid #1a1a1a;
+      background: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all var(--speed);
+    }
+    .circle-btn:hover {
+      background: #111;
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .section {
+      width: var(--container);
+      margin: 74px auto;
+    }
+    .section h2 {
+      margin: 0 0 10px;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.01em;
+    }
+    .section .lead {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .features {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      transform: translateY(16px);
+      opacity: 0;
+      animation: rise .7s forwards;
+    }
+    .feature-card:nth-child(2){ animation-delay: .08s; }
+    .feature-card:nth-child(3){ animation-delay: .16s; }
+    .feature-card:nth-child(4){ animation-delay: .24s; }
+    .icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--accent-2);
+      display: grid; place-items: center;
+      font-size: 16px; margin-bottom: 10px;
+    }
+    .feature-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer {
+      width: var(--container);
+      margin: 70px auto 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: #7a7a7a;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes rise {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 1000px) {
+      .features { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 48px; }
+      .showcase-wrap { border-radius: 16px; mask: none; -webkit-mask: none; }
+      .features { grid-template-columns: 1fr; }
+      .circle-btn { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero container">
+    <span class="badge">SMART TODO WORKFLOW</span>
+    <h1>Pickplan：一句话记下任务，自动变成清晰可执行的计划</h1>
+    <p>
+      无论你想手动管理待办，还是直接“说人话”交给 AI，Pickplan 都能帮你快速落地，并在关键时间点准时提醒，不再漏事、拖延、临时抱佛脚。
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="#download">立即获取</a>
+      <a class="btn ghost" href="#features">查看核心功能</a>
+    </div>
+  </header>
+
+  <section class="showcase-wrap" aria-label="应用界面展示">
+    <div class="showcase-track" id="showcaseTrack">
+      <article class="shot">
+        <img src="https://via.placeholder.com/1600x900/f2f2f2/111111?text=请替换为软件首页截图" alt="软件首页截图占位图：建议放置主界面与任务列表" />
+        <span class="caption">清爽任务面板，一眼看清今天要做什么</span>
+      </article>
+      <article class="shot">
+        <img src="https://via.placeholder.com/1600x900/ececec/111111?text=请替换为AI输入页截图" alt="AI输入页截图占位图：建议放置自然语言创建任务的聊天界面" />
+        <span class="caption">输入一句话，自动解析提醒与截止时间</span>
+      </article>
+      <article class="shot">
+        <img src="https://via.placeholder.com/1600x900/e8e8e8/111111?text=请替换为提醒或设置页截图" alt="提醒与设置页截图占位图：建议放置通知设置或模型配置界面" />
+        <span class="caption">多模型接入，自由选择你常用的 AI 服务</span>
+      </article>
+    </div>
+  </section>
+
+  <div class="showcase-controls" aria-label="界面轮播控制">
+    <button class="circle-btn" id="prevBtn" aria-label="上一张">←</button>
+    <button class="circle-btn" id="nextBtn" aria-label="下一张">→</button>
+  </div>
+
+  <section class="section" id="features">
+    <h2>核心功能</h2>
+    <p class="lead">从“记下来”到“准时做到”，Pickplan 把任务管理里最麻烦的步骤自动化，让你把精力留给真正重要的事。</p>
+    <div class="features">
+      <article class="feature-card">
+        <div class="icon">✍</div>
+        <h3>手动模式，随时增删改查</h3>
+        <p>像便签一样轻松记录任务，完成即勾选，过期可清理，日常待办管理简单直观。</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">🤖</div>
+        <h3>自然语言转待办</h3>
+        <p>“明天下午三点提醒我开会”这类表达可直接识别，自动生成可执行任务条目。</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">⏰</div>
+        <h3>提醒 + 截止 双时间守护</h3>
+        <p>提前提醒你开始行动，到期再次提示，避免“知道要做却总是错过时间”。</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">🔌</div>
+        <h3>多 AI 服务接入</h3>
+        <p>支持快速切换不同 AI 服务与模型，你可按成本、速度和效果灵活选择。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="download">
+    <h2>准备好把待办真正做完了吗？</h2>
+    <p class="lead">现在就开始使用 Pickplan，让每个想法都按时落地。</p>
+    <div class="cta-row" style="justify-content:flex-start;margin-top:16px;">
+      <a class="btn" href="#">下载 / 获取</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 Pickplan</span>
+    <span>Built for creators who ship.</span>
+  </footer>
+
+  <script>
+    (function () {
+      const track = document.getElementById("showcaseTrack");
+      const next = document.getElementById("nextBtn");
+      const prev = document.getElementById("prevBtn");
+      const total = track.children.length;
+      let index = 0;
+
+      function update() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      function goNext() {
+        index = (index + 1) % total;
+        update();
+      }
+
+      function goPrev() {
+        index = (index - 1 + total) % total;
+        update();
+      }
+
+      next.addEventListener("click", goNext);
+      prev.addEventListener("click", goPrev);
+
+      let timer = setInterval(goNext, 4200);
+      [next, prev, track].forEach(el => {
+        el.addEventListener("mouseenter", () => clearInterval(timer));
+        el.addEventListener("mouseleave", () => timer = setInterval(goNext, 4200));
+      });
+    })();
+  </script>
+</body>
+</html>

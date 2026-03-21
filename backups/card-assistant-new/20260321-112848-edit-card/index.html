@@ -1,0 +1,784 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to my site！</title>
+  <link rel="icon" type="image/jpeg" href="./asset/image/LOGO/mylogo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="./asset/image/LOGO/mylogo.jpg">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+
+<body>
+  <canvas id="flow-canvas" aria-hidden="true"></canvas>
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
+  <button id="snow-toggle" class="snow-toggle" type="button" aria-label="开启下雪效果" aria-pressed="false" title="下雪开关">
+    <svg class="snow-toggle-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 2V22M4 7L20 17M20 7L4 17M7 4L12 9L17 4M7 20L12 15L17 20" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <main class="hero-shell">
+    <div class="title">
+      <p>HELLO! This is Lotus! Welcome!</p>
+    </div>
+
+    <div id="banner">
+      <div class="img-list img-wrapper"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="last btn" type="button" aria-label="上一张">
+        <svg class="icon left" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+          <path
+            d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z" />
+        </svg>
+      </button>
+      <button class="next btn" type="button" aria-label="下一张">
+        <svg class="icon right" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+          <path
+            d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="carousel-progress" aria-label="轮播进度">
+      <div class="carousel-progress-track">
+        <div class="carousel-progress-fill"></div>
+      </div>
+      <p class="carousel-progress-text" aria-live="polite">1 / 1</p>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-arrow">&lt;</span>
+      <span class="scroll-hint-arrow">&lt;</span>
+    </div>
+  </main>
+
+  <section class="support-panel desktop-support desktop-landing" aria-label="心理援助信息（桌面端）">
+    <h2 class="support-title support-title-image-wrap" data-reveal>
+      <img class="support-title-image" src="./asset/font/font-transparent.png" alt="轻舟已过万重山">
+    </h2>
+    <div class="support-copy">
+      <p data-reveal>抑郁症是医学上经过严格定义的病症，本质上是一种疾病，而不是所谓的“过于敏感”、“抗压能力不足”。同时，只要积极治疗，抑郁症患者是能够正常生活的。</p>
+      <p data-reveal>抑郁症患者是不幸的病人，他们的患病表现不一，请不要带有任何刻板印象。如果发现你身边的人有抑郁症倾向，请关心和理解他们。</p>
+      <p data-reveal>如果你常常感到胸闷、心慌、乏力、头疼、肢体不受控抖动等，这些可能是抑郁症导致的躯体化症状，请及时就医并向身边人寻求帮助。你没有任何问题，你只是运气不好生了一场病，是你的生理功能出现了问题。</p>
+      <p class="support-copy-final" data-reveal>拥有什么样的念头都是正常的，无论如何，最后请再拨打一次全国统一心理援助热线：12356，他们一直都在，我们一直都在。</p>
+      <p class="support-contact" data-reveal>Github：https://github.com/smartlotus</p>
+      <p class="support-contact" data-reveal>email：smartlotus1130@gmail.com</p>
+      <p class="support-contact" data-reveal>2838974103@qq.com</p>
+      <p class="support-contact" data-reveal>copyblog：https://lotussblog.netlify.app/</p>
+    </div>
+  </section>
+
+  <section class="support-panel mobile-support" aria-label="心理援助信息（移动端）">
+    <h2 class="support-title support-title-image-wrap" data-reveal>
+      <img class="support-title-image" src="./asset/font/font-transparent.png" alt="轻舟已过万重山">
+    </h2>
+    <div class="support-copy">
+      <p data-reveal>抑郁症是医学上经过严格定义的病症，本质上是一种疾病，而不是所谓的“过于敏感”、“抗压能力不足”。同时，只要积极治疗，抑郁症患者是能够正常生活的。</p>
+      <p data-reveal>抑郁症患者是不幸的病人，他们的患病表现不一，请不要带有任何刻板印象。如果发现你身边的人有抑郁症倾向，请关心和理解他们。</p>
+      <p data-reveal>如果你常常感到胸闷、心慌、乏力、头疼、肢体不受控抖动等，这些可能是抑郁症导致的躯体化症状，请及时就医并向身边人寻求帮助。你没有任何问题，你只是运气不好生了一场病，是你的生理功能出现了问题。</p>
+      <p class="support-copy-final" data-reveal>拥有什么样的念头都是正常的，无论如何，最后请再拨打一次全国统一心理援助热线：12356，他们一首都在，我们一直都在。</p>
+      <p class="support-contact" data-reveal>Github：https://github.com/smartlotus</p>
+      <p class="support-contact" data-reveal>email：smartlotus1130@gmail.com</p>
+      <p class="support-contact" data-reveal>2838974103@qq.com</p>
+      <p class="support-contact" data-reveal>copyblog：https://lotussblog.netlify.app/</p>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const imgList = document.querySelector('.img-list');
+      const root = document.documentElement;
+      const banner = document.querySelector('#banner');
+      const prevBtn = document.querySelector('.last');
+      const nextBtn = document.querySelector('.next');
+      const btnGroup = document.querySelector('.btn-group');
+      const progressWrap = document.querySelector('.carousel-progress');
+      const progressFill = document.querySelector('.carousel-progress-fill');
+      const progressText = document.querySelector('.carousel-progress-text');
+      const scrollHint = document.querySelector('.scroll-hint');
+      const supportPanels = Array.from(document.querySelectorAll('.support-panel'));
+
+      if (!imgList || !banner || !prevBtn || !nextBtn || !btnGroup || !Array.isArray(CARDS) || CARDS.length === 0) return;
+
+      const fallbackImage = './asset/image/cards/1.png';
+      let unitPx = 1;
+      let buttonLocked = false;
+      let progressRaf = 0;
+      let visibilityRaf = 0;
+      let touchSession = null;
+      let suppressClickUntil = 0;
+
+      function clamp(num, min, max) {
+        return Math.max(min, Math.min(max, num));
+      }
+
+      function isHttpUrl(value) {
+        return /^https?:\/\//i.test(value);
+      }
+
+      function escapeHtml(value) {
+        const source = String(value || '');
+        return source
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      function normalizePath(value) {
+        const raw = String(value || '').trim().replace(/^["']|["']$/g, '');
+        if (!raw) return '';
+        if (raw.startsWith('#')) return raw;
+        if (isHttpUrl(raw)) return raw;
+
+        const normalized = raw.replaceAll('\\', '/');
+        if (normalized.startsWith('./') || normalized.startsWith('../') || normalized.startsWith('/')) {
+          return normalized;
+        }
+
+        if (/^[a-zA-Z]:\//.test(normalized)) {
+          return '';
+        }
+
+        return `./${normalized}`;
+      }
+
+      function normalizeCard(card, index) {
+        const title = String(card?.title || '').trim() || `未命名卡片 ${index + 1}`;
+        const alt = String(card?.alt || '').trim() || title;
+        const image = normalizePath(card?.image) || fallbackImage;
+        const link = normalizePath(card?.link) || '#';
+        return { title, alt, image, link };
+      }
+
+      const cards = CARDS.map((card, index) => normalizeCard(card, index));
+
+      imgList.innerHTML = cards
+        .map((card) => `
+          <a class="img-box" href="${escapeHtml(card.link)}">
+            <div class="info"><h3>${escapeHtml(card.title)}</h3></div>
+            <img src="${escapeHtml(card.image)}" alt="${escapeHtml(card.alt)}" loading="lazy" decoding="async">
+          </a>
+        `)
+        .join('');
+
+      function refreshMetrics() {
+        const styles = getComputedStyle(root);
+        const postSpacing = parseFloat(styles.getPropertyValue('--post-spacing')) || 0;
+        const postSize = parseFloat(styles.getPropertyValue('--post-size')) || 0;
+        unitPx = (window.innerWidth * (postSize + postSpacing)) / 100;
+        if (!Number.isFinite(unitPx) || unitPx <= 0) {
+          unitPx = 1;
+        }
+      }
+
+      function getCurrentIndex() {
+        return clamp(Math.round(imgList.scrollLeft / unitPx), 0, cards.length - 1);
+      }
+
+      function updateProgress() {
+        const current = getCurrentIndex();
+        const ratio = cards.length <= 1 ? 1 : current / (cards.length - 1);
+
+        if (progressFill) {
+          progressFill.style.transform = `scaleX(${ratio.toFixed(5)})`;
+        }
+        if (progressText) {
+          progressText.textContent = `${current + 1} / ${cards.length}`;
+        }
+      }
+
+      function requestProgressUpdate() {
+        if (progressRaf) return;
+        progressRaf = requestAnimationFrame(() => {
+          progressRaf = 0;
+          updateProgress();
+        });
+      }
+
+      function scrollToIndex(index, behavior = 'smooth') {
+        const targetIndex = clamp(index, 0, cards.length - 1);
+        imgList.scrollTo({
+          left: targetIndex * unitPx,
+          behavior
+        });
+        if (behavior === 'auto') {
+          updateProgress();
+        }
+      }
+
+      function throttle(action) {
+        if (buttonLocked) return;
+        buttonLocked = true;
+        action();
+        window.setTimeout(() => {
+          buttonLocked = false;
+        }, 220);
+      }
+
+      function slideNext() {
+        scrollToIndex(getCurrentIndex() + 1);
+      }
+
+      function slidePrev() {
+        scrollToIndex(getCurrentIndex() - 1);
+      }
+
+      function syncButtonBottom() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) {
+          btnGroup.style.bottom = '8%';
+          return;
+        }
+
+        const progressRect = progressWrap?.getBoundingClientRect();
+        if (!progressRect) {
+          btnGroup.style.bottom = '72px';
+          return;
+        }
+
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+        const safeBottom = window.visualViewport?.height
+          ? Math.max(0, viewportHeight - window.visualViewport.height)
+          : 0;
+        const gap = Math.max(12, Math.min(24, Math.round(viewportHeight * 0.018)));
+        const bottom = Math.max(18, Math.round(viewportHeight - progressRect.top + gap + safeBottom));
+
+        btnGroup.style.bottom = `${bottom}px`;
+      }
+
+      function getActiveSupportPanel() {
+        return supportPanels.find((panel) => getComputedStyle(panel).display !== 'none') || supportPanels[0] || null;
+      }
+
+      function updateControlVisibility() {
+        visibilityRaf = 0;
+        const targetPanel = getActiveSupportPanel();
+        if (!targetPanel) return;
+
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const visibilityAnchor = isMobile
+          ? targetPanel.querySelector('.support-title') || targetPanel
+          : targetPanel;
+        const rect = visibilityAnchor.getBoundingClientRect();
+        const triggerLine = isMobile
+          ? window.innerHeight - 132
+          : window.innerHeight - 40;
+        const shouldHide = rect.top <= triggerLine;
+        btnGroup.classList.toggle('is-hidden', shouldHide);
+        progressWrap?.classList.toggle('is-hidden', shouldHide);
+        scrollHint?.classList.toggle('is-hidden', shouldHide);
+      }
+
+      function requestVisibilityUpdate() {
+        if (visibilityRaf) return;
+        visibilityRaf = requestAnimationFrame(updateControlVisibility);
+      }
+
+      function onWheel(event) {
+        const isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+
+        if (isVertical) {
+          event.preventDefault();
+          imgList.scrollLeft += event.deltaY;
+        }
+        requestProgressUpdate();
+      }
+
+      function onTouchStart(event) {
+        if (!event.touches || event.touches.length !== 1) return;
+        const touch = event.touches[0];
+        touchSession = {
+          startX: touch.clientX,
+          startY: touch.clientY,
+          lastX: touch.clientX,
+          startScrollLeft: imgList.scrollLeft,
+          dragging: false,
+          lockedAxis: ''
+        };
+      }
+
+      function onTouchMove(event) {
+        if (!touchSession || !event.touches || event.touches.length !== 1) return;
+
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - touchSession.startX;
+        const deltaY = touch.clientY - touchSession.startY;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const dragMultiplier = isMobile ? 0.25 : 1;
+        const gestureThreshold = isMobile ? 2 : 4;
+
+        if (!touchSession.lockedAxis) {
+          if (Math.abs(deltaX) < gestureThreshold && Math.abs(deltaY) < gestureThreshold) return;
+          touchSession.lockedAxis = Math.abs(deltaX) > Math.abs(deltaY) ? 'x' : 'y';
+        }
+
+        if (touchSession.lockedAxis !== 'x') return;
+
+        event.preventDefault();
+        touchSession.dragging = true;
+        touchSession.lastX = touch.clientX;
+        imgList.scrollLeft = touchSession.startScrollLeft - deltaX * dragMultiplier;
+        requestProgressUpdate();
+      }
+
+      function onTouchEnd() {
+        if (!touchSession) return;
+
+        if (touchSession.dragging) {
+          suppressClickUntil = performance.now() + 320;
+          scrollToIndex(getCurrentIndex(), 'smooth');
+        }
+
+        touchSession = null;
+      }
+
+      refreshMetrics();
+      scrollToIndex(0, 'auto');
+      syncButtonBottom();
+      requestProgressUpdate();
+      requestVisibilityUpdate();
+
+      window.setTimeout(() => {
+        btnGroup.style.opacity = '1';
+        progressWrap?.classList.add('is-ready');
+        scrollHint?.classList.add('is-ready');
+        requestVisibilityUpdate();
+      }, 300);
+
+      nextBtn.addEventListener('click', () => throttle(slideNext));
+      prevBtn.addEventListener('click', () => throttle(slidePrev));
+      imgList.addEventListener('scroll', requestProgressUpdate, { passive: true });
+      banner.addEventListener('wheel', onWheel, { passive: false });
+      imgList.addEventListener('touchstart', onTouchStart, { passive: true });
+      imgList.addEventListener('touchmove', onTouchMove, { passive: false });
+      imgList.addEventListener('touchend', onTouchEnd, { passive: true });
+      imgList.addEventListener('touchcancel', onTouchEnd, { passive: true });
+      imgList.addEventListener('click', (event) => {
+        if (performance.now() < suppressClickUntil) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+      window.addEventListener('scroll', requestVisibilityUpdate, { passive: true });
+      window.addEventListener('resize', () => {
+        const keepIndex = getCurrentIndex();
+        refreshMetrics();
+        scrollToIndex(keepIndex, 'auto');
+        syncButtonBottom();
+        requestVisibilityUpdate();
+      });
+
+      window.visualViewport?.addEventListener('resize', syncButtonBottom, { passive: true });
+      window.visualViewport?.addEventListener('scroll', syncButtonBottom, { passive: true });
+
+    })();
+  </script>
+  <script>
+    (() => {
+      const canvas = document.getElementById('flow-canvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
+
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let rafId = 0;
+      let time = 0;
+      let pointerX = 0;
+      let pointerY = 0;
+      let pointerVx = 0;
+      let pointerVy = 0;
+      let pointerEnergy = 0;
+      let hasPointer = false;
+      let lastPointerTs = 0;
+
+      function resizeCanvas() {
+        width = Math.max(1, Math.floor(window.innerWidth));
+        height = Math.max(1, Math.floor(window.innerHeight));
+        dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        if (!hasPointer) {
+          pointerX = width * 0.5;
+          pointerY = height * 0.68;
+        }
+      }
+
+      function updatePointer(x, y, now = performance.now()) {
+        const clampedX = Math.max(0, Math.min(width, x));
+        const clampedY = Math.max(0, Math.min(height, y));
+
+        if (!hasPointer) {
+          pointerX = clampedX;
+          pointerY = clampedY;
+          hasPointer = true;
+          lastPointerTs = now;
+          return;
+        }
+
+        const dt = Math.max(0.001, (now - lastPointerTs) / 1000);
+        const dx = clampedX - pointerX;
+        const dy = clampedY - pointerY;
+        pointerVx = dx / dt;
+        pointerVy = dy / dt;
+        pointerX = clampedX;
+        pointerY = clampedY;
+        pointerEnergy = Math.min(1.5, pointerEnergy + Math.min(1.1, Math.hypot(pointerVx, pointerVy) / 950));
+        lastPointerTs = now;
+      }
+
+      function drawFlowLayer(layerIndex) {
+        const spacing = 26 + layerIndex * 16;
+        const lineWidth = 0.9 + layerIndex * 0.42;
+        const baseAlpha = 0.074 - layerIndex * 0.014;
+        const waveA = 8 + layerIndex * 7;
+        const waveB = 3 + layerIndex * 2.2;
+        const speed = 0.34 + layerIndex * 0.18;
+        const stepX = 20;
+
+        ctx.strokeStyle = `rgba(108, 134, 152, ${Math.max(0.02, baseAlpha).toFixed(4)})`;
+        ctx.lineWidth = lineWidth;
+        ctx.beginPath();
+
+        for (let baseY = -spacing * 2; baseY <= height + spacing * 2; baseY += spacing) {
+          let firstPoint = true;
+          for (let x = -stepX; x <= width + stepX; x += stepX) {
+            let y = baseY;
+
+            y += Math.sin(x * 0.0085 + time * speed + baseY * 0.018) * waveA;
+            y += Math.cos(x * 0.004 + time * (speed * 0.76) + baseY * 0.021) * waveB;
+
+            if (pointerEnergy > 0.01) {
+              const dx = x - pointerX;
+              const dy = y - pointerY;
+              const dist2 = dx * dx + dy * dy;
+              const radius2 = (230 + layerIndex * 90) ** 2;
+              if (dist2 < radius2) {
+                const influence = (1 - dist2 / radius2) ** 2;
+                const sway = (pointerVx * 0.0048 + pointerVy * 0.0025) * influence;
+                y += sway * (10 + layerIndex * 7);
+              }
+            }
+
+            if (firstPoint) {
+              ctx.moveTo(x, y);
+              firstPoint = false;
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+        }
+
+        ctx.stroke();
+      }
+
+      function drawHighlights() {
+        ctx.globalCompositeOperation = 'screen';
+        const glowCount = 4;
+
+        for (let i = 0; i < glowCount; i += 1) {
+          const drift = time * (18 + i * 6);
+          const cx = ((width * (0.08 + i * 0.24)) + Math.sin(time * (0.7 + i * 0.28)) * 120 + drift) % (width + 260) - 130;
+          const cy = height * (0.2 + i * 0.16) + Math.cos(time * (0.44 + i * 0.23)) * (28 + i * 8);
+          const radius = 140 + i * 34;
+
+          const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+          g.addColorStop(0, 'rgba(255,255,255,0.09)');
+          g.addColorStop(0.56, 'rgba(218,232,242,0.045)');
+          g.addColorStop(1, 'rgba(255,255,255,0)');
+
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.globalCompositeOperation = 'source-over';
+      }
+
+      function frame() {
+        time += 0.0115;
+        pointerVx *= 0.88;
+        pointerVy *= 0.88;
+        pointerEnergy *= 0.945;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const wash = ctx.createLinearGradient(0, 0, width, height);
+        wash.addColorStop(0, 'rgba(236,245,250,0.34)');
+        wash.addColorStop(1, 'rgba(248,252,255,0.2)');
+        ctx.fillStyle = wash;
+        ctx.fillRect(0, 0, width, height);
+
+        drawFlowLayer(0);
+        drawFlowLayer(1);
+        drawFlowLayer(2);
+        drawHighlights();
+
+        rafId = requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('mousemove', (event) => {
+        updatePointer(event.clientX, event.clientY);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (event) => {
+        const touch = event.touches?.[0];
+        if (!touch) return;
+        updatePointer(touch.clientX, touch.clientY);
+      }, { passive: true });
+
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+
+      resizeCanvas();
+      frame();
+
+      window.addEventListener('beforeunload', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const revealItems = Array.from(document.querySelectorAll('.support-panel [data-reveal]'));
+      if (revealItems.length === 0) return;
+
+      let ticking = false;
+
+      function clamp(num, min, max) {
+        return Math.max(min, Math.min(max, num));
+      }
+
+      function setRevealProgress() {
+        ticking = false;
+
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const startLine = viewportHeight * (isMobile ? 0.96 : 0.93);
+        const endLine = viewportHeight * (isMobile ? 0.24 : 0.2);
+        const stagedOffset = isMobile ? 10 : 14;
+
+        revealItems.forEach((item, index) => {
+          const rect = item.getBoundingClientRect();
+          const stagedTop = rect.top - index * stagedOffset;
+          const raw = (startLine - stagedTop) / (startLine - endLine);
+          const progress = clamp(raw, 0, 1);
+          item.style.setProperty('--reveal-progress', progress.toFixed(3));
+        });
+      }
+
+      function requestProgressUpdate() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(setRevealProgress);
+      }
+
+      setRevealProgress();
+      window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+      window.addEventListener('resize', requestProgressUpdate);
+    })();
+  </script>
+  <script>
+    (() => {
+      const canvas = document.getElementById('snow-canvas');
+      const toggle = document.getElementById('snow-toggle');
+      if (!canvas || !toggle) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const storageKey = 'mysite_snow_enabled';
+      let width = 0;
+      let height = 0;
+      let flakes = [];
+      let enabled = false;
+      let rafId = 0;
+      let timeSeed = 0;
+
+      function rand(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function createFlake(fromTop = false) {
+        return {
+          x: rand(-30, width + 30),
+          y: fromTop ? rand(-height, -10) : rand(-20, height),
+          r: rand(1.2, 3.8),
+          speedY: rand(0.28, 1.05),
+          speedX: rand(-0.35, 0.35),
+          swing: rand(0.08, 0.55),
+          swingSpeed: rand(0.8, 1.6),
+          phase: rand(0, Math.PI * 2),
+          alpha: rand(0.55, 0.92)
+        };
+      }
+
+      function rebuildFlakes() {
+        const targetCount = Math.max(88, Math.min(320, Math.floor((width * height) / 13000)));
+
+        if (flakes.length > targetCount) {
+          flakes.length = targetCount;
+          return;
+        }
+
+        while (flakes.length < targetCount) {
+          flakes.push(createFlake(false));
+        }
+      }
+
+      function resizeCanvas() {
+        width = canvas.width = Math.max(1, Math.floor(window.innerWidth));
+        height = canvas.height = Math.max(1, Math.floor(window.innerHeight));
+        rebuildFlakes();
+      }
+
+      function drawSnow() {
+        if (!enabled) {
+          rafId = 0;
+          return;
+        }
+
+        ctx.clearRect(0, 0, width, height);
+        timeSeed += 0.016;
+
+        for (let i = 0; i < flakes.length; i += 1) {
+          const flake = flakes[i];
+          flake.y += flake.speedY;
+          flake.x += flake.speedX + Math.sin((timeSeed + flake.phase) * flake.swingSpeed) * flake.swing;
+
+          if (flake.y - flake.r > height || flake.x < -40 || flake.x > width + 40) {
+            flakes[i] = createFlake(true);
+            continue;
+          }
+
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255,255,255,${flake.alpha.toFixed(3)})`;
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.24)';
+          ctx.shadowBlur = 2.1;
+          ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.shadowBlur = 0;
+        rafId = requestAnimationFrame(drawSnow);
+      }
+
+      function syncButtonState() {
+        toggle.classList.toggle('is-active', enabled);
+        toggle.setAttribute('aria-pressed', String(enabled));
+        toggle.setAttribute('aria-label', enabled ? '关闭下雪效果' : '开启下雪效果');
+      }
+
+      function startSnow() {
+        enabled = true;
+        syncButtonState();
+        try {
+          localStorage.setItem(storageKey, '1');
+        } catch {}
+        if (!rafId) {
+          rafId = requestAnimationFrame(drawSnow);
+        }
+      }
+
+      function stopSnow() {
+        enabled = false;
+        syncButtonState();
+        try {
+          localStorage.setItem(storageKey, '0');
+        } catch {}
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+        ctx.clearRect(0, 0, width, height);
+      }
+
+      toggle.addEventListener('click', () => {
+        if (enabled) {
+          stopSnow();
+        } else {
+          startSnow();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+      }, { passive: true });
+
+      resizeCanvas();
+      syncButtonState();
+
+      let shouldEnable = false;
+      try {
+        shouldEnable = localStorage.getItem(storageKey) === '1';
+      } catch {}
+
+      if (shouldEnable) {
+        startSnow();
+      }
+    })();
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

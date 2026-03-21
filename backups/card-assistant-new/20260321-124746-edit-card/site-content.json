@@ -1,0 +1,170 @@
+{
+    "site":  {
+                 "browserTitle":  "Let us have fun!",
+                 "bannerTitle":  "HELLO! This is Lotus! Welcome!"
+             },
+    "items":  [
+                  {
+                      "id":  "lotus-page",
+                      "enabled":  true,
+                      "order":  1,
+                      "cardTitle":  "Lotus\u0027page",
+                      "cardImage":  "./asset/image/cards/lotus-page-card.png",
+                      "cardAlt":  "Lotus\u0027page",
+                      "pageSlug":  "lotus-page",
+                      "pageFile":  "https://lotusspagefinal.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Lotus\u0027page",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/lotus-page-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "lerobot",
+                      "enabled":  true,
+                      "order":  2,
+                      "cardTitle":  "Lerobot",
+                      "cardImage":  "./asset/image/cards/lerobot-card.png",
+                      "cardAlt":  "Lerobot",
+                      "pageSlug":  "lerobot",
+                      "pageFile":  "https://lerobot.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Lerobot",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/lerobot-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "pickplan",
+                      "enabled":  true,
+                      "order":  3,
+                      "cardTitle":  "Pickplan",
+                      "cardImage":  "./asset/image/cards/pickplan-card.jpg",
+                      "cardAlt":  "Pickplan",
+                      "pageSlug":  "pickplan",
+                      "pageFile":  "https://pickplanweb.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickplan",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/pickplan-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "pickup",
+                      "enabled":  true,
+                      "order":  4,
+                      "cardTitle":  "Pickup",
+                      "cardImage":  "./asset/image/cards/pickup-card.jpg",
+                      "cardAlt":  "Pickup",
+                      "pageSlug":  "pickup",
+                      "pageFile":  "https://pickupweb.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickup",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/pickup-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "pickbank",
+                      "enabled":  true,
+                      "order":  5,
+                      "cardTitle":  "Pickbank",
+                      "cardImage":  "./asset/image/cards/pickbank-card.jpg",
+                      "cardAlt":  "Pickbank",
+                      "pageSlug":  "pickbank",
+                      "pageFile":  "https://pickbankwebs.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickbank",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/pickbank-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "mindstream",
+                      "enabled":  true,
+                      "order":  6,
+                      "cardTitle":  "Mindstream",
+                      "cardImage":  "./asset/image/cards/mindstream-card.png",
+                      "cardAlt":  "Mindstream",
+                      "pageSlug":  "mindstream",
+                      "pageFile":  "https://lotussmindstream.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Mindstream",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/mindstream-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "insight",
+                      "enabled":  true,
+                      "order":  7,
+                      "cardTitle":  "Insight",
+                      "cardImage":  "./asset/image/cards/insight-card.png",
+                      "cardAlt":  "Insight",
+                      "pageSlug":  "insight",
+                      "pageFile":  "https://lotussinsight.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Insight",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/insight-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "item-20260321112945",
+                      "enabled":  true,
+                      "order":  8,
+                      "cardTitle":  "庐山派",
+                      "cardImage":  "./asset/image/cards/item-20260321112945-card.png",
+                      "cardAlt":  "庐山派",
+                      "pageSlug":  "item-20260321112945",
+                      "pageFile":  "https://lushanpai.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "庐山派",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/item-20260321112945-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "item-20260321113014",
+                      "enabled":  true,
+                      "order":  9,
+                      "cardTitle":  "泰山派",
+                      "cardImage":  "./asset/image/cards/item-20260321113014-card.jpg",
+                      "cardAlt":  "泰山派",
+                      "pageSlug":  "item-20260321113014",
+                      "pageFile":  "http://taishanpai.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "泰山派",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/item-20260321113014-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  }
+              ]
+}

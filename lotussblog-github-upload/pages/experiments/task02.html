@@ -1,0 +1,332 @@
+【分析总结】  
+参考页的视觉特征很明确: 大字号强标题、黑白主色+高对比按钮、网格背景、带弧形裁切的横向图片区、圆形切换按钮和入场动画。源码层面我提炼出这款记账产品的核心卖点是: `一句话记账`、`智能识别（本地优先+AI增强）`、`预算进度管理`、`多周期可视化统计`、`报表导出与AI建议`。下面这版代码把这些功能映射进同样的视觉骨架，并做了完整响应式适配。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拾念记账 - 让每一笔都更有意义</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #151515;
+      --muted: #60656f;
+      --line: #e8eaee;
+      --accent: #ff6a3d;
+      --card: #f7f8fa;
+      --radius: 22px;
+      --container: min(1120px, 92vw);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden; }
+    body {
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(to right, rgba(0,0,0,.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,.045) 1px, transparent 1px),
+        var(--bg);
+      background-size: 48px 48px, 48px 48px, auto;
+    }
+
+    .container { width: var(--container); margin: 0 auto; }
+
+    .topbar {
+      padding: 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .04em; }
+    .cta-mini {
+      border: 1px solid var(--ink); border-radius: 999px;
+      padding: 10px 16px; text-decoration: none; color: var(--ink); font-weight: 600;
+      transition: .25s ease;
+      background: #fff;
+    }
+    .cta-mini:hover { background: var(--ink); color: #fff; }
+
+    .hero {
+      padding: 36px 0 16px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.1vw, 1.25rem);
+      line-height: 1.7;
+    }
+    .hero-actions {
+      margin-top: 28px;
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .25s ease;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid transparent;
+    }
+    .btn.primary { background: var(--ink); color: #fff; }
+    .btn.primary:hover { transform: translateY(-2px); }
+    .btn.ghost { border-color: var(--ink); color: var(--ink); background: #fff; }
+    .btn.ghost:hover { background: #111; color: #fff; }
+
+    .showcase {
+      margin-top: 40px;
+      position: relative;
+      border-radius: 0 0 46% 46% / 0 0 20% 20%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .track {
+      display: flex;
+      transition: transform .55s ease;
+    }
+    .slide {
+      min-width: 100%;
+      padding: 16px;
+    }
+    .shot {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--line);
+      background: #f0f2f5;
+    }
+    .slide-tip {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .switch {
+      width: var(--container);
+      margin: 14px auto 0;
+      display: flex; justify-content: center; gap: 10px;
+    }
+    .switch button {
+      width: 52px; height: 52px; border-radius: 999px;
+      border: 1px solid var(--ink); background: #fff; color: var(--ink);
+      font-size: 1.2rem; cursor: pointer; transition: .25s ease;
+    }
+    .switch button:hover { background: var(--ink); color: #fff; transform: scale(1.06); }
+
+    .section { padding: 76px 0 24px; }
+    .section h2 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      margin-bottom: 10px;
+      letter-spacing: -.02em;
+    }
+    .section p.lead { color: var(--muted); line-height: 1.7; }
+
+    .features {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      transform: translateY(16px);
+      opacity: 0;
+      transition: .6s ease;
+    }
+    .card.show { transform: translateY(0); opacity: 1; }
+    .tag {
+      display: inline-block;
+      font-size: .78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); line-height: 1.65; font-size: .95rem; }
+
+    .final-cta {
+      margin: 60px auto 30px;
+      width: var(--container);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 28px;
+      background: linear-gradient(120deg, #fff, #f7f8fb);
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .final-cta h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+    .final-cta p { color: var(--muted); margin-top: 6px; }
+
+    footer {
+      text-align: center;
+      color: #8b9098;
+      font-size: .9rem;
+      padding: 20px 0 36px;
+    }
+
+    @media (max-width: 980px) {
+      .features { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .features { grid-template-columns: 1fr; }
+      .topbar { padding-top: 14px; }
+      .section { padding-top: 58px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container topbar">
+    <div class="brand">拾念记账</div>
+    <a class="cta-mini" href="#download">立即获取</a>
+  </header>
+
+  <section class="container hero">
+    <h1>记账不用想太多，<br>一句话就够了。</h1>
+    <p>
+      拾念记账把“记一笔”变成几秒钟的小动作。说一句、点一下，账目自动归类，
+      预算实时可见，消费趋势一眼明白。
+    </p>
+    <div class="hero-actions" id="download">
+      <a class="btn primary" href="#">下载 App</a>
+      <a class="btn ghost" href="#">获取内测资格</a>
+    </div>
+  </section>
+
+  <section class="showcase container" aria-label="应用界面展示轮播区域">
+    <div class="track" id="track">
+      <figure class="slide">
+        <img class="shot" src="https://placehold.co/1600x900/png?text=%E6%94%BE%E7%BD%AE%E9%A6%96%E5%B1%8F%E6%80%BB%E8%A7%88%E6%88%AA%E5%9B%BE" alt="这里放软件首页总览截图，展示预算余额和近期收支概览" />
+        <figcaption class="slide-tip">首页总览: 剩余预算、收支摘要、趋势一屏看完</figcaption>
+      </figure>
+      <figure class="slide">
+        <img class="shot" src="https://placehold.co/1600x900/png?text=%E6%94%BE%E7%BD%AE%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B%E6%88%AA%E5%9B%BE" alt="这里放一句话记账或手动录入截图，展示快速记账流程" />
+        <figcaption class="slide-tip">快速录入: 自然语言输入 + 手动编辑，怎么顺手怎么来</figcaption>
+      </figure>
+      <figure class="slide">
+        <img class="shot" src="https://placehold.co/1600x900/png?text=%E6%94%BE%E7%BD%AE%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E6%88%AA%E5%9B%BE" alt="这里放统计分析页截图，展示分类占比、趋势图和财务建议模块" />
+        <figcaption class="slide-tip">统计分析: 周/月/年与自定义区间，趋势和结构都清楚</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="switch">
+    <button id="prev" aria-label="查看上一张界面截图">‹</button>
+    <button id="next" aria-label="查看下一张界面截图">›</button>
+  </div>
+
+  <section class="section container">
+    <h2>核心功能</h2>
+    <p class="lead">从“记下来”到“看明白”，围绕真实日常记账场景设计。</p>
+
+    <div class="features" id="features">
+      <article class="card">
+        <span class="tag">01 快速记账</span>
+        <h3>一句话就能落账</h3>
+        <p>“午饭 28”“打车 35”这类输入可直接识别，不用手动填一堆字段，记账速度明显提升。</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">02 智能识别</span>
+        <h3>本地优先，智能补全</h3>
+        <p>常见记录可快速完成；复杂表达也能智能理解，减少反复修改，让每次录入都更顺滑。</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">03 预算管理</span>
+        <h3>预算进度实时可见</h3>
+        <p>可设置周期预算并查看剩余额度，花钱节奏更有边界感，月底不再“糊里糊涂超支”。</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">04 可视化报表</span>
+        <h3>消费结构一眼看懂</h3>
+        <p>按周、月、年或自定义区间查看收支，分类占比和趋势变化清晰直观，复盘更有依据。</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">05 导出与建议</span>
+        <h3>可分享报表 + 分析建议</h3>
+        <p>支持导出账单汇总，方便复盘或共享；还能获得简洁的财务建议，帮助你优化下一步决策。</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">06 体验设计</span>
+        <h3>轻盈界面，低学习成本</h3>
+        <p>信息层级清晰、交互反馈及时，新用户也能快速上手，把记账变成愿意坚持的习惯。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="final-cta container">
+    <div>
+      <h3>从今天开始，和钱的关系更清楚一点。</h3>
+      <p>拾念记账，帮你把每一次消费都变成更聪明的选择。</p>
+    </div>
+    <a class="btn primary" href="#">立即下载</a>
+  </section>
+
+  <footer>© 2026 拾念记账 · Official Landing Page</footer>
+
+  <script>
+    (function () {
+      const track = document.getElementById("track");
+      const slides = Array.from(track.children);
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let index = 0;
+      let timer = null;
+
+      function go(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = "translateX(" + (-index * 100) + "%)";
+      }
+
+      function autoPlay() {
+        clearInterval(timer);
+        timer = setInterval(() => go(index + 1), 4200);
+      }
+
+      prev.addEventListener("click", () => { go(index - 1); autoPlay(); });
+      next.addEventListener("click", () => { go(index + 1); autoPlay(); });
+
+      go(0);
+      autoPlay();
+
+      const cards = document.querySelectorAll(".card");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cards.forEach((card, i) => {
+        card.style.transitionDelay = (i * 70) + "ms";
+        io.observe(card);
+      });
+    })();
+  </script>
+</body>
+</html>
+```

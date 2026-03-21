@@ -1,25 +1,21 @@
 @echo off
 chcp 65001 >nul
-setlocal
+echo ========================================
+echo 开始将文件上传到 GitHub...
+echo ========================================
 
-set "SCRIPT_DIR=%~dp0"
-set "PS_SCRIPT=%SCRIPT_DIR%scripts\publish-to-github.ps1"
+echo [1/3] 正在添加所有更改的文件...
+git add .
 
-echo.
-echo Exporting the current site as a standalone project and pushing it to GitHub...
-echo Default repository: https://github.com/smartlotus/lotussblog.git
-echo.
+echo [2/3] 正在生成提交...
+:: 这里自动获取当前时间作为提交信息（Commit Message），方便你在 GitHub 上查看是什么时候提交的
+git commit -m "Auto update: %date% %time%"
 
-powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%"
-set "EXIT_CODE=%ERRORLEVEL%"
+echo [3/3] 正在推送到 GitHub...
+:: 将代码推送到远程仓库
+git push
 
-echo.
-if "%EXIT_CODE%"=="0" (
-    echo Finished.
-) else (
-    echo Failed. Please review the error message above.
-)
-
-echo.
+echo ========================================
+echo 上传已完成！
+echo ========================================
 pause
-exit /b %EXIT_CODE%

@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拾念记账 | 产品介绍</title>
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --ink: #132018;
+      --muted: #4f6155;
+      --line: #d9e0d6;
+      --brand: #1f8f5f;
+      --brand-dark: #176e49;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
+    body {
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 20%, #e9f5ea 0, transparent 28%),
+        radial-gradient(circle at 85% 10%, #e3f1e8 0, transparent 30%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    .wrap { width: min(1120px, 92vw); margin: 0 auto; }
+
+    .hero {
+      padding: 72px 0 42px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: .12em;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--brand-dark);
+    }
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(2rem, 5.8vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .sub {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 620px;
+    }
+    .actions { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 700;
+      transition: .22s ease;
+    }
+    .btn.primary { background: var(--brand); color: #fff; }
+    .btn.primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
+    .btn.ghost { color: var(--ink); border: 1px solid var(--line); background: #fff; }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 20px 40px rgba(29, 51, 38, .10);
+      transform: rotate(-1.2deg);
+    }
+    .hero-card img {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid var(--line);
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .section { padding: 24px 0 8px; }
+    .section h2 {
+      font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+      letter-spacing: -.02em;
+    }
+    .section .lead { margin-top: 8px; color: var(--muted); }
+
+    .features {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 170px;
+      transition: .22s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 28px rgba(20, 35, 27, .08); }
+    .icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), #42b77f);
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .card h3 { font-size: 1.08rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: .95rem; }
+
+    .shots {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .shot {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px;
+    }
+    .shot img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+    }
+    .shot p { margin-top: 8px; font-size: .9rem; color: var(--muted); }
+
+    footer {
+      margin: 40px 0 24px;
+      color: #6b7b70;
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-card { transform: none; }
+      .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      .features, .shots { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="badge">SMART LEDGER</span>
+        <h1>记账这件小事，
+          <br />终于可以很轻松。</h1>
+        <p class="sub">拾念记账把“记一笔”变成几秒钟：一句话输入，自动识别，预算与趋势即时更新。你不再只是记账，而是在看见自己的消费节奏。</p>
+        <div class="actions">
+          <a href="#" class="btn primary">立即下载</a>
+          <a href="#features" class="btn ghost">查看功能</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img src="https://placehold.co/1280x800/eaf4ed/214634?text=%E6%94%BE%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E6%88%AA%E5%9B%BE" alt="这里放应用首页截图，展示预算余额、收支摘要和近期记录" />
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>核心亮点</h2>
+      <p class="lead">围绕真实日常场景设计，从快速记账到复盘分析一体完成。</p>
+
+      <div class="features">
+        <article class="card">
+          <div class="icon">01</div>
+          <h3>一句话记账</h3>
+          <p>输入“午饭 28”“打车 35”，快速落账，减少繁琐操作。</p>
+        </article>
+        <article class="card">
+          <div class="icon">02</div>
+          <h3>智能识别</h3>
+          <p>常见表达自动识别分类，复杂内容也能辅助解析。</p>
+        </article>
+        <article class="card">
+          <div class="icon">03</div>
+          <h3>预算看板</h3>
+          <p>预算进度实时可见，余额变化一眼就懂，花钱更有边界。</p>
+        </article>
+        <article class="card">
+          <div class="icon">04</div>
+          <h3>多周期统计</h3>
+          <p>支持周、月、年和自定义区间，趋势变化清晰可视。</p>
+        </article>
+        <article class="card">
+          <div class="icon">05</div>
+          <h3>导出与分享</h3>
+          <p>一键导出账单记录，复盘和交流都更方便。</p>
+        </article>
+        <article class="card">
+          <div class="icon">06</div>
+          <h3>AI 建议</h3>
+          <p>自动生成简洁建议，帮助你找到可执行的优化方向。</p>
+        </article>
+      </div>
+
+      <div class="shots">
+        <article class="shot">
+          <img src="https://placehold.co/1200x675/f0f6f2/214634?text=%E6%94%BE%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B%E6%88%AA%E5%9B%BE" alt="这里放快速记账流程截图，展示输入和识别结果" />
+          <p>快速录入流程示意图</p>
+        </article>
+        <article class="shot">
+          <img src="https://placehold.co/1200x675/e8f1eb/214634?text=%E6%94%BE%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E6%88%AA%E5%9B%BE" alt="这里放统计分析页面截图，展示分类占比和趋势图" />
+          <p>统计分析页面示意图</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>© 2026 拾念记账 · 让每一笔都更有意义</footer>
+  </main>
+</body>
+</html>

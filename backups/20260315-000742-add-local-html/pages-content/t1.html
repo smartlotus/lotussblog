@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omni Capsule - 把生活装进你的时间胶囊</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#171717;
+      --muted:#5e5e5e;
+      --line:#ececec;
+      --panel:#f8f8fb;
+      --accent:#7b5cff;
+      --accent-2:#3fc6ff;
+      --accent-3:#ffca3a;
+      --radius:20px;
+      --shadow:0 20px 50px rgba(20,20,20,.08);
+      --container:min(1140px, 92vw);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--bg);
+      background-size:28px 28px, 28px 28px, auto;
+      overflow-x:hidden;
+    }
+
+    .container{width:var(--container);margin:0 auto}
+    .section{padding:84px 0}
+    .kicker{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);background:#fff}
+    h1,h2,h3,p{margin:0}
+    p{line-height:1.7;color:var(--muted)}
+    .reveal{opacity:0;transform:translateY(24px);transition:all .6s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* Hero */
+    .hero{padding:58px 0 40px;position:relative}
+    .hero-wrap{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero h1{
+      font-size:clamp(34px, 6vw, 68px);
+      line-height:1.05;
+      letter-spacing:-.03em;
+      margin:16px 0 18px;
+    }
+    .hero .sub{font-size:18px;max-width:56ch}
+    .hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+    .btn{
+      border:none;border-radius:14px;padding:14px 20px;font-size:15px;font-weight:700;cursor:pointer;transition:.25s ease;
+    }
+    .btn-primary{
+      background:var(--ink);color:#fff;
+    }
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-ghost{
+      background:#fff;border:1px solid var(--line);color:var(--ink);
+    }
+
+    .hero-card{
+      border:1px solid var(--line);
+      background:linear-gradient(155deg,#fff,#f3f2ff 48%,#eef9ff);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      transform:rotate(-1.2deg);
+    }
+    .hero-card .meta{display:flex;gap:10px;margin-bottom:14px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.p{background:var(--accent)}
+    .dot.b{background:var(--accent-2)}
+    .dot.y{background:var(--accent-3)}
+    .hero-card .mock{
+      border-radius:14px;
+      border:1px solid #ddd;
+      overflow:hidden;
+      background:#121212;
+    }
+    .hero-card img{display:block;width:100%;height:auto}
+
+    /* Showcase */
+    .showcase-shell{
+      border:1px solid var(--line);
+      border-radius:30px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .showcase-head{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 18px;border-bottom:1px solid var(--line);
+    }
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      padding:26px;
+      background:
+        radial-gradient(1200px 280px at 50% -100px, #e8e3ff, transparent 75%),
+        radial-gradient(1200px 280px at 50% 120%, #dff5ff, transparent 70%),
+        #fff;
+    }
+    .shot-track{
+      display:flex;
+      gap:16px;
+      transition:transform .45s ease;
+      will-change:transform;
+    }
+    .shot{
+      flex:0 0 min(560px, 82vw);
+      border:1px solid #dcdcdc;
+      border-radius:16px;
+      overflow:hidden;
+      background:#111;
+      box-shadow:0 8px 24px rgba(0,0,0,.13);
+    }
+    .shot img{display:block;width:100%;height:auto}
+    .nav{
+      display:flex;gap:8px
+    }
+    .icon-btn{
+      width:42px;height:42px;border-radius:50%;
+      border:1px solid var(--ink);background:#fff;cursor:pointer;font-size:18px;
+    }
+
+    /* Features */
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+    .feature{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--panel);
+      padding:20px;
+      transition:.25s ease;
+    }
+    .feature:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(15,15,15,.08)}
+    .feature h3{font-size:18px;margin:12px 0 8px}
+    .badge{
+      width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;
+      background:linear-gradient(140deg,var(--accent),#5a3fff);
+    }
+
+    /* CTA block */
+    .final-cta{
+      margin-top:18px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:26px;
+      display:flex;justify-content:space-between;gap:16px;align-items:center;
+      background:#fff;
+    }
+
+    @media (max-width: 980px){
+      .hero-wrap{grid-template-columns:1fr}
+      .features-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .final-cta{flex-direction:column;align-items:flex-start}
+    }
+    @media (max-width: 640px){
+      .section{padding:62px 0}
+      .hero{padding-top:28px}
+      .features-grid{grid-template-columns:1fr}
+      .hero .sub{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div class="reveal">
+        <span class="kicker">Futuristic Smart Diary</span>
+        <h1>把每一天，写成可回看的时间胶囊。</h1>
+        <p class="sub">
+          Omni Capsule 帮你用文字、照片和当下音乐，轻松保存生活片段。
+          之后你可以直接向 AI 提问过去，也能一键生成阶段性总结，重新理解自己。
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="getNow">立即获取</button>
+          <button class="btn btn-ghost" id="toShowcase">先看界面</button>
+        </div>
+      </div>
+
+      <div class="hero-card reveal">
+        <div class="meta"><span class="dot p"></span><span class="dot b"></span><span class="dot y"></span></div>
+        <div class="mock">
+          <img src="https://placehold.co/900x560/121212/FFFFFF?text=App+Preview+Hero"
+               alt="软件首页主视觉截图占位图，请替换为产品首屏截图" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="showcase">
+    <div class="container reveal">
+      <span class="kicker">UI Showcase</span>
+      <h2 style="font-size:clamp(26px,4vw,42px);margin:14px 0 10px;">界面展示</h2>
+      <p>预留了显眼展示位，建议替换为「时间线页 / 编辑页 / AI 中心页」三张核心截图。</p>
+
+      <div class="showcase-shell" style="margin-top:20px;">
+        <div class="showcase-head">
+          <strong>Product Screens</strong>
+          <div class="nav">
+            <button class="icon-btn" id="prevBtn" aria-label="上一张">←</button>
+            <button class="icon-btn" id="nextBtn" aria-label="下一张">→</button>
+          </div>
+        </div>
+        <div class="carousel">
+          <div class="shot-track" id="shotTrack">
+            <div class="shot">
+              <img src="https://placehold.co/1200x760/181818/F5F5F5?text=Timeline+Screen"
+                   alt="软件时间线页面截图占位图，请替换为真实时间线截图" />
+            </div>
+            <div class="shot">
+              <img src="https://placehold.co/1200x760/1E1E2E/F5F5F5?text=Editor+Screen"
+                   alt="软件编辑页面截图占位图，请替换为真实编辑界面截图" />
+            </div>
+            <div class="shot">
+              <img src="https://placehold.co/1200x760/222222/F5F5F5?text=AI+Hub+Screen"
+                   alt="软件AI中心页面截图占位图，请替换为真实AI功能截图" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container reveal">
+      <span class="kicker">Core Features</span>
+      <h2 style="font-size:clamp(26px,4vw,42px);margin:14px 0 10px;">核心功能</h2>
+      <p>从记录到回顾，再到 AI 复盘，一条完整闭环。</p>
+
+      <div class="features-grid">
+        <article class="feature">
+          <div class="badge">01</div>
+          <h3>图文音乐一体记录</h3>
+          <p>写下当下想法，附上照片与正在听的歌，让每条记忆更有现场感。</p>
+        </article>
+        <article class="feature">
+          <div class="badge">02</div>
+          <h3>可持续编辑与补充</h3>
+          <p>旧记录可随时回看与更新，你的成长轨迹不会被“定格在昨天”。</p>
+        </article>
+        <article class="feature">
+          <div class="badge">03</div>
+          <h3>对过去发问的 AI 助手</h3>
+          <p>直接提问“我那段时间在忙什么”，AI 基于你的历史内容给出回答。</p>
+        </article>
+        <article class="feature">
+          <div class="badge">04</div>
+          <h3>按时间段智能总结</h3>
+          <p>选择一个日期区间，自动生成情绪脉络、重复主题与温和建议。</p>
+        </article>
+        <article class="feature">
+          <div class="badge">05</div>
+          <h3>一键导出你的记录</h3>
+          <p>随时导出完整内容，备份、迁移或长期保存都更安心。</p>
+        </article>
+      </div>
+
+      <div class="final-cta" id="download">
+        <div>
+          <h3 style="font-size:28px;line-height:1.2;">开始创建你的第一颗时间胶囊</h3>
+          <p style="margin-top:8px;">把情绪、故事与灵感，留给未来的自己。</p>
+        </div>
+        <button class="btn btn-primary">下载 / 获取 Omni Capsule</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Smooth jump
+    document.getElementById("toShowcase").addEventListener("click", () => {
+      document.getElementById("showcase").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    document.getElementById("getNow").addEventListener("click", () => {
+      document.getElementById("download").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    // Simple carousel
+    const track = document.getElementById("shotTrack");
+    const cards = Array.from(track.children);
+    let idx = 0;
+
+    function moveCarousel() {
+      const cardWidth = cards[0].getBoundingClientRect().width + 16;
+      track.style.transform = `translateX(${-idx * cardWidth}px)`;
+    }
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      idx = (idx + 1) % cards.length;
+      moveCarousel();
+    });
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      idx = (idx - 1 + cards.length) % cards.length;
+      moveCarousel();
+    });
+    window.addEventListener("resize", moveCarousel);
+
+    // Reveal animation
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("in");
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

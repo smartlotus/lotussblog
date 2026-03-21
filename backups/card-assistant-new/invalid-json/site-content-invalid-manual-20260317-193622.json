@@ -1,0 +1,119 @@
+{
+  "site": {
+    "browserTitle": "\u692D\u5706\u8F6E\u64AD\u5C55\u793A",
+    "bannerTitle": "HELLO! This is Lotus! Welcome!"
+  },
+  "items": [
+    {
+      "id": "link1",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "Pickup",
+      "cardImage": "",
+      "cardAlt": ""C:\Users\28389\Desktop\mypickapps\webs\mysite\asset\image\LOGO\pickuplogo.jpg"",
+      "pageSlug": "link1",
+      "pageFile": "https://pickup30.netlify.app/",
+      "pageMode": "generated",
+      "pageTitle": "\u9884\u7559\u94FE\u63A5 1",
+      "pageSummary": "\u8FD9\u662F\u4E00\u4E2A\u9884\u7559\u9875\u9762\u3002",
+      "pageLayout": "image-right",
+      "pageImage": "./asset/image/cards/2.png",
+      "pageBody": [
+        "\u8FD9\u91CC\u53EF\u4EE5\u653E\u4F60\u7684\u9879\u76EE\u4ECB\u7ECD\u3002",
+        "\u5EFA\u8BAE\u6309\u4EA7\u54C1\u3001\u4F5C\u54C1\u3001\u65E5\u8BB0\u7B49\u7C7B\u522B\u957F\u671F\u7EF4\u62A4\u3002"
+      ]
+    },
+    {
+      "id": "link2",
+      "enabled": true,
+      "order": 2,
+      "cardTitle": "\u9884\u7559\u94FE\u63A5 2",
+      "cardImage": "./asset/image/cards/3.png",
+      "cardAlt": "\u9884\u7559\u94FE\u63A5 2",
+      "pageSlug": "link2",
+      "pageFile": "pages/content/link2.html",
+      "pageMode": "generated",
+      "pageTitle": "\u9884\u7559\u94FE\u63A5 2",
+      "pageSummary": "\u8FD9\u662F\u4E00\u4E2A\u9884\u7559\u9875\u9762\u3002",
+      "pageLayout": "image-left",
+      "pageImage": "./asset/image/cards/3.png",
+      "pageBody": [
+        "\u8FD9\u91CC\u53EF\u4EE5\u653E\u4F60\u7684\u7B2C\u4E8C\u7C7B\u5185\u5BB9\u3002",
+        "\u4F60\u4E5F\u53EF\u4EE5\u5728\u7BA1\u7406\u5668\u4E2D\u4E00\u952E\u5220\u9664\u6216\u65B0\u589E\u3002"
+      ]
+    },
+    {
+      "id": "author",
+      "enabled": true,
+      "order": 3,
+      "cardTitle": "MEMEME",
+      "cardImage": "./asset/image/cards/author-card.png",
+      "cardAlt": "\u5173\u4E8E\u4F5C\u8005",
+      "pageSlug": "author",
+      "pageFile": "pages/content/author.html",
+      "pageMode": "generated",
+      "pageTitle": "Lotus/\u6E1A\u6709\u6F5C",
+      "pageSummary": "A stupid university student.None.",
+      "pageLayout": "image-left",
+      "pageImage": "./asset/image/pages/author-page.png",
+      "pageBody": [
+        "Welcome to my personal site! Just look around!"
+      ]
+    },
+    {
+      "id": "pickbank",
+      "enabled": true,
+      "order": 4,
+      "cardTitle": "Pickbank",
+      "cardImage": "./asset/image/cards/1.png",
+      "cardAlt": "Pickbank",
+      "pageSlug": "pickbank",
+      "pageFile": "pages/content/pickbank.html",
+      "pageMode": "generated",
+      "pageTitle": "Pickbank",
+      "pageSummary": "\u8FD9\u662F\u4E00\u4E2A\u65B0\u9875\u9762\uFF0C\u4F60\u53EF\u4EE5\u7A0D\u540E\u7EE7\u7EED\u5B8C\u5584\u5185\u5BB9\u3002",
+      "pageLayout": "image-left",
+      "pageImage": "./asset/image/cards/1.png",
+      "pageBody": [
+        "\u8FD9\u91CC\u662F\u6B63\u6587\u7B2C\u4E00\u6BB5\u3002",
+        "\u4F60\u53EF\u4EE5\u5728\u7BA1\u7406\u5668\u4E2D\u518D\u6B21\u7F16\u8F91\u8FD9\u90E8\u5206\u5185\u5BB9\u3002"
+      ]
+    },
+    {
+      "id": "item-20260317091013",
+      "enabled": true,
+      "order": 5,
+      "cardTitle": "task01",
+      "cardImage": "./asset/image/cards/1.png",
+      "cardAlt": "task01",
+      "pageSlug": "item-20260317091013",
+      "pageFile": "https://pickup30.netlify.app/",
+      "pageMode": "external-link",
+      "pageTitle": "task01",
+      "pageSummary": "\u5916\u90E8\u94FE\u63A5\u9875\u9762",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/1.png",
+      "pageBody": [
+        "\u8BE5\u5361\u7247\u4F1A\u8DF3\u8F6C\u5230\u5916\u90E8\u94FE\u63A5\u3002"
+      ]
+    },
+    {
+      "id": "item-20260317150612",
+      "enabled": true,
+      "order": 6,
+      "cardTitle": "Pickbank",
+      "cardImage": "./asset/image/cards/1.png",
+      "cardAlt": "Pickbank",
+      "pageSlug": "item-20260317150612",
+      "pageFile": "https://pickappspickbank.netlify.app/",
+      "pageMode": "external-link",
+      "pageTitle": "Pickbank",
+      "pageSummary": "\u5916\u90E8\u94FE\u63A5\u9875\u9762",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/1.png",
+      "pageBody": [
+        "\u8BE5\u5361\u7247\u4F1A\u8DF3\u8F6C\u5230\u5916\u90E8\u94FE\u63A5\u3002"
+      ]
+    }
+  ]
+}

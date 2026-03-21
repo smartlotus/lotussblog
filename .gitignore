@@ -1,13 +1,3 @@
-﻿# Windows
-Thumbs.db
-Desktop.ini
-
-# Local caches and build output
-.appdata/
-.dotnet-cli/
-.localappdata/
-.nuget/
-.vscode/
-backups/
-dist/
-tools/
+dist/SiteManagerUI/
+tools/SiteManagerUI/bin/
+tools/SiteManagerUI/obj/

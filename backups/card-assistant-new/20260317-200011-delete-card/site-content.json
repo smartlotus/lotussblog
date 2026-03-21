@@ -1,0 +1,100 @@
+{
+    "site":  {
+                 "browserTitle":  "椭圆轮播展示",
+                 "bannerTitle":  "HELLO! This is Lotus! Welcome!"
+             },
+    "items":  [
+                  {
+                      "id":  "link2",
+                      "enabled":  true,
+                      "order":  1,
+                      "cardTitle":  "预留链接 2",
+                      "cardImage":  "./asset/image/cards/3.png",
+                      "cardAlt":  "预留链接 2",
+                      "pageSlug":  "link2",
+                      "pageFile":  "pages/content/link2.html",
+                      "pageMode":  "generated",
+                      "pageTitle":  "预留链接 2",
+                      "pageSummary":  "这是一个预留页面。",
+                      "pageLayout":  "image-left",
+                      "pageImage":  "./asset/image/cards/3.png",
+                      "pageBody":  [
+                                       "这里可以放你的第二类内容。",
+                                       "你也可以在管理器中一键删除或新增。"
+                                   ]
+                  },
+                  {
+                      "id":  "author",
+                      "enabled":  true,
+                      "order":  2,
+                      "cardTitle":  "MEMEME",
+                      "cardImage":  "./asset/image/cards/author-card.png",
+                      "cardAlt":  "关于作者",
+                      "pageSlug":  "author",
+                      "pageFile":  "pages/content/author.html",
+                      "pageMode":  "generated",
+                      "pageTitle":  "Lotus/渚有潜",
+                      "pageSummary":  "A stupid university student.None.",
+                      "pageLayout":  "image-left",
+                      "pageImage":  "./asset/image/pages/author-page.png",
+                      "pageBody":  [
+                                       "Welcome to my personal site! Just look around!"
+                                   ]
+                  },
+                  {
+                      "id":  "pickbank",
+                      "enabled":  true,
+                      "order":  3,
+                      "cardTitle":  "Pickbank",
+                      "cardImage":  "./asset/image/cards/1.png",
+                      "cardAlt":  "Pickbank",
+                      "pageSlug":  "pickbank",
+                      "pageFile":  "pages/content/pickbank.html",
+                      "pageMode":  "generated",
+                      "pageTitle":  "Pickbank",
+                      "pageSummary":  "这是一个新页面，你可以稍后继续完善内容。",
+                      "pageLayout":  "image-left",
+                      "pageImage":  "./asset/image/cards/1.png",
+                      "pageBody":  [
+                                       "这里是正文第一段。",
+                                       "你可以在管理器中再次编辑这部分内容。"
+                                   ]
+                  },
+                  {
+                      "id":  "item-20260317091013",
+                      "enabled":  true,
+                      "order":  4,
+                      "cardTitle":  "task01",
+                      "cardImage":  "./asset/image/cards/1.png",
+                      "cardAlt":  "task01",
+                      "pageSlug":  "item-20260317091013",
+                      "pageFile":  "https://pickup30.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "task01",
+                      "pageSummary":  "外部链接页面",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/1.png",
+                      "pageBody":  [
+                                       "该卡片会跳转到外部链接。"
+                                   ]
+                  },
+                  {
+                      "id":  "item-20260317150612",
+                      "enabled":  true,
+                      "order":  5,
+                      "cardTitle":  "Pickbank",
+                      "cardImage":  "./asset/image/cards/1.png",
+                      "cardAlt":  "Pickbank",
+                      "pageSlug":  "item-20260317150612",
+                      "pageFile":  "https://pickappspickbank.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickbank",
+                      "pageSummary":  "外部链接页面",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/1.png",
+                      "pageBody":  [
+                                       "该卡片会跳转到外部链接。"
+                                   ]
+                  }
+              ]
+}

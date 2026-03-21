@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>椭圆轮播展示</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+
+<body>
+  <div class="title">
+    <p>HELLO! This is Lotus! Welcome!</p>
+  </div>
+
+  <div id="banner">
+    <div class="img-list img-wrapper"></div>
+  </div>
+
+  <div class="btn-group">
+    <button class="last btn" type="button" aria-label="上一张">
+      <svg class="icon left" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+        <path
+          d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z" />
+      </svg>
+    </button>
+    <button class="next btn" type="button" aria-label="下一张">
+      <svg class="icon right" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+        <path
+          d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z" />
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    (() => {
+      const imgList = document.querySelector('.img-list');
+      const root = document.documentElement;
+      const prevBtn = document.querySelector('.last');
+      const nextBtn = document.querySelector('.next');
+      const btnGroup = document.querySelector('.btn-group');
+
+      if (!imgList || !prevBtn || !nextBtn || !Array.isArray(CARDS) || CARDS.length === 0) return;
+
+      const postSpacing = Number(getComputedStyle(root).getPropertyValue('--post-spacing').replace('vw', ''));
+      const postSize = Number(getComputedStyle(root).getPropertyValue('--post-size').replace('vw', ''));
+      const unit = postSize + postSpacing;
+      const baseOffset = 13.39;
+      const animationTimeMs = 500;
+
+      const renderCards = [...CARDS, ...CARDS, ...CARDS];
+
+      imgList.innerHTML = renderCards
+        .map((card) => `
+          <article class="img-box" onclick="window.location.href='${card.link || '#'}'">
+            <div class="info"><h3>${card.title || ''}</h3></div>
+            <img src="${card.image}" alt="${card.alt || card.title || '轮播图'}">
+          </article>
+        `)
+        .join('');
+
+      let pointer = CARDS.length;
+      let locked = false;
+
+      function applyTransform(withAnim = true) {
+        imgList.style.transition = withAnim ? 'transform 0.5s ease' : 'none';
+        imgList.style.transform = `translateX(${baseOffset - pointer * unit}vw)`;
+      }
+
+      function normalizeIfNeeded() {
+        if (pointer >= CARDS.length * 2) {
+          pointer -= CARDS.length;
+          applyTransform(false);
+        }
+        if (pointer < CARDS.length) {
+          pointer += CARDS.length;
+          applyTransform(false);
+        }
+      }
+
+      function throttle(action) {
+        if (locked) return;
+        locked = true;
+        action();
+        setTimeout(() => {
+          normalizeIfNeeded();
+          locked = false;
+        }, animationTimeMs + 10);
+      }
+
+      function slideNext() {
+        pointer += 1;
+        applyTransform(true);
+      }
+
+      function slidePrev() {
+        pointer -= 1;
+        applyTransform(true);
+      }
+
+      applyTransform(false);
+
+      setTimeout(() => {
+        btnGroup.style.opacity = '1';
+        btnGroup.style.bottom = '5%';
+      }, 350);
+
+      nextBtn.addEventListener('click', () => throttle(slideNext));
+      prevBtn.addEventListener('click', () => throttle(slidePrev));
+    })();
+  </script>
+</body>
+
+</html>
+
+
+
+
+

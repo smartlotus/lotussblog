@@ -1,0 +1,98 @@
+{
+    "site":  {
+                 "browserTitle":  "椭圆轮播展示",
+                 "bannerTitle":  "HELLO! This is Lotus! Welcome!"
+             },
+    "items":  [
+                  {
+                      "id":  "pickup",
+                      "enabled":  true,
+                      "order":  1,
+                      "cardTitle":  "Pickup",
+                      "cardImage":  "./asset/image/cards/pickup-card.jpg",
+                      "cardAlt":  "Pickup",
+                      "pageSlug":  "pickup",
+                      "pageFile":  "https://pickuplotus.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickup",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/pickup-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "pickbank",
+                      "enabled":  true,
+                      "order":  2,
+                      "cardTitle":  "Pickbank",
+                      "cardImage":  "./asset/image/cards/pickbank-card.jpg",
+                      "cardAlt":  "Pickbank",
+                      "pageSlug":  "pickbank",
+                      "pageFile":  "https://pickbank.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Pickbank",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/pickbank-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "mindstream",
+                      "enabled":  true,
+                      "order":  3,
+                      "cardTitle":  "Mindstream",
+                      "cardImage":  "./asset/image/cards/mindstream-card.png",
+                      "cardAlt":  "Mindstream",
+                      "pageSlug":  "mindstream",
+                      "pageFile":  "https://lotusmindstream.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Mindstream",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/mindstream-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "insight",
+                      "enabled":  true,
+                      "order":  4,
+                      "cardTitle":  "Insight",
+                      "cardImage":  "./asset/image/cards/insight-card.png",
+                      "cardAlt":  "Insight",
+                      "pageSlug":  "insight",
+                      "pageFile":  "https://lotussinsight.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Insight",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/insight-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "lotus-page",
+                      "enabled":  true,
+                      "order":  5,
+                      "cardTitle":  "Lotus\u0027page",
+                      "cardImage":  "./asset/image/cards/lotus-page-card.png",
+                      "cardAlt":  "Lotus\u0027page",
+                      "pageSlug":  "lotus-page",
+                      "pageFile":  "https://lotusspage.netlify.app/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Lotus\u0027page",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/lotus-page-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  }
+              ]
+}

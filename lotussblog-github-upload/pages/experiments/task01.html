@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拾念 | 把情绪与灵感，变成可见的前进轨迹</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#060606;
+      --surface:#111;
+      --text:#f2f2f2;
+      --muted:#8a8a8a;
+      --line:#2f2f2f;
+      --accent:#ffffff;
+      --accent-red:#960000;
+      --accent-teal:#005f5f;
+      --accent-gold:#a67c00;
+      --accent-purple:#360060;
+      --radius:18px;
+      --space:clamp(16px,2.2vw,32px);
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:"Space Grotesk",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,0) 20%),
+        url("https://www.transparenttextures.com/patterns/graphy.png"),
+        var(--bg);
+    }
+
+    .container{width:min(var(--max),92vw);margin:0 auto}
+    .section{padding:clamp(56px,10vw,110px) 0}
+    .reveal{opacity:0;transform:translateY(22px);transition:.6s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* Hero */
+    .hero{padding-top:clamp(34px,8vw,72px)}
+    .kicker{
+      font-size:12px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      font-family:"Bebas Neue", sans-serif;
+      font-size:clamp(56px,11vw,130px);
+      line-height:.88;
+      margin:0;
+      letter-spacing:.02em;
+    }
+    .hero p{
+      max-width:680px;
+      margin:20px 0 28px;
+      color:#d0d0d0;
+      font-size:clamp(15px,2vw,20px);
+      line-height:1.7;
+    }
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--accent);
+      padding:12px 22px;
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--text);
+      transition:.25s ease;
+      font-weight:700;
+      font-size:14px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .btn.primary{background:#fff;color:#000}
+    .btn:hover{transform:translateY(-2px)}
+
+    /* Curved showcase (参考页的弧形展示语言) */
+    .showcase-wrap{
+      margin-top:28px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      position:relative;
+      isolation:isolate;
+    }
+    .showcase-wrap::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(150,0,0,.24), transparent 32%),
+        radial-gradient(circle at 88% 80%, rgba(0,95,95,.2), transparent 34%);
+      pointer-events:none;
+      z-index:-1;
+    }
+    .curve-mask{
+      clip-path:ellipse(95% 76% at 50% 45%);
+      overflow:hidden;
+      border-bottom:1px solid var(--line);
+    }
+    .track{
+      display:flex;
+      transition:transform .55s ease;
+      will-change:transform;
+    }
+    .shot{
+      min-width:100%;
+      position:relative;
+      aspect-ratio:16/9;
+      background:#000;
+    }
+    .shot img{
+      width:100%;height:100%;object-fit:cover;
+      opacity:.9;
+    }
+    .shot .label{
+      position:absolute;left:12px;bottom:12px;
+      background:rgba(0,0,0,.58);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .controls{
+      display:flex;justify-content:center;gap:10px;padding:16px;
+    }
+    .ctrl{
+      width:44px;height:44px;border-radius:50%;
+      border:1px solid #fff;background:#fff;color:#000;
+      font-weight:700;cursor:pointer;
+      transition:.2s ease;
+    }
+    .ctrl:hover{transform:scale(1.08)}
+    .ui-tip{
+      padding:0 18px 18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Features */
+    .section-title{
+      font-family:"Bebas Neue", sans-serif;
+      font-size:clamp(36px,7vw,74px);
+      letter-spacing:.04em;
+      margin:0 0 8px;
+    }
+    .section-sub{color:var(--muted);margin:0 0 26px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column:span 6;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      padding:20px;
+      min-height:170px;
+    }
+    .card h3{margin:0 0 10px;font-size:20px}
+    .card p{margin:0;color:#cfcfcf;line-height:1.72}
+    .tag{
+      display:inline-block;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      border:1px solid currentColor;
+      border-radius:999px;
+      padding:4px 10px;
+      margin-bottom:12px;
+    }
+    .c1 .tag{color:var(--accent-red)}
+    .c2 .tag{color:var(--accent-teal)}
+    .c3 .tag{color:var(--accent-gold)}
+    .c4 .tag{color:var(--accent-purple)}
+    .c5 .tag{color:#d0d0d0}
+
+    /* Footer CTA */
+    .final{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:26px;
+      display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;
+      background:rgba(255,255,255,.02);
+    }
+    .final strong{font-size:clamp(20px,3.2vw,30px)}
+
+    @media (max-width:860px){
+      .card{grid-column:span 12}
+      .curve-mask{clip-path:ellipse(120% 84% at 50% 36%)}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero section">
+    <div class="container">
+      <div class="kicker reveal">拾念 · Mind / Seek / Sight / Sync</div>
+      <h1 class="reveal">把情绪<br>变成可见的力量</h1>
+      <p class="reveal">
+        拾念是一款面向独立思考者的自我整理工具。你可以随时记录内心想法、收集外部课题，
+        用图像与声音沉淀当下，再通过清晰的数据反馈看见自己的变化与成长。
+      </p>
+      <div class="cta-row reveal">
+        <a class="btn primary" href="#download">立即获取</a>
+        <a class="btn" href="#features">查看核心功能</a>
+      </div>
+
+      <div class="showcase-wrap reveal" id="screens">
+        <div class="curve-mask">
+          <div class="track" id="track">
+            <figure class="shot">
+              <img src="https://placehold.co/1400x788/121212/FFFFFF?text=Home+Screen+Preview"
+                   alt="拾念主界面截图占位图：这里替换为软件首页实际运行截图" />
+              <figcaption class="label">Mind / Seek</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="https://placehold.co/1400x788/1A1A1A/FFFFFF?text=Vision+Screen+Preview"
+                   alt="拾念视觉记录界面截图占位图：这里替换为图片采集与图库展示截图" />
+              <figcaption class="label">Vision</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="https://placehold.co/1400x788/101010/FFFFFF?text=Profile+Stats+Preview"
+                   alt="拾念统计面板截图占位图：这里替换为数据统计与进度分析截图" />
+              <figcaption class="label">Stats</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="ctrl" id="prev" aria-label="上一张界面截图">←</button>
+          <button class="ctrl" id="next" aria-label="下一张界面截图">→</button>
+        </div>
+        <div class="ui-tip">界面展示区（请替换为你的真实运行截图）</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="features">
+      <div class="container">
+        <h2 class="section-title reveal">核心功能</h2>
+        <p class="section-sub reveal">从记录到整理，再到反馈，形成一条完整的自我管理闭环。</p>
+        <div class="grid">
+          <article class="card c1 reveal">
+            <span class="tag">Dual Capture</span>
+            <h3>双通道记录：想法与行动分开管理</h3>
+            <p>把“脑内反复想的事”和“现实要处理的事”分别记录，不再混在一起。信息更清晰，执行更有方向。</p>
+          </article>
+          <article class="card c2 reveal">
+            <span class="tag">State Flow</span>
+            <h3>待处理 / 已完成，一键切换</h3>
+            <p>每条记录都能快速切换状态，今天该做什么、已经推进了什么，一眼就能看懂，减少拖延和内耗。</p>
+          </article>
+          <article class="card c3 reveal">
+            <span class="tag">Visual Journal</span>
+            <h3>视觉留存：把瞬间变成可回看的素材</h3>
+            <p>拍下或上传关键画面，自动沉淀为视觉片段。回看时更容易找回当时的场景、情绪与灵感。</p>
+          </article>
+          <article class="card c4 reveal">
+            <span class="tag">Audio Space</span>
+            <h3>声音空间：在播放中放慢思绪</h3>
+            <p>用声音建立一个可随时进入的专注区。无论是放松、复盘还是重启状态，都有一个稳定的“过渡带”。</p>
+          </article>
+          <article class="card c5 reveal" style="grid-column:span 12;">
+            <span class="tag">Progress Insight</span>
+            <h3>多维统计反馈：看见你正在变好</h3>
+            <p>系统会汇总不同维度的记录与完成进度，用直观数据帮助你识别节奏、调整策略，让成长不再只靠感觉。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="download">
+      <div class="container">
+        <div class="final reveal">
+          <strong>准备好把情绪整理成你的行动力了吗？</strong>
+          <a class="btn primary" href="#">下载 / 获取拾念</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 简单截图轮播
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    let i = 0;
+
+    function renderSlide() {
+      track.style.transform = `translateX(-${i * 100}%)`;
+    }
+
+    document.getElementById('next').addEventListener('click', () => {
+      i = (i + 1) % slides.length;
+      renderSlide();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      i = (i - 1 + slides.length) % slides.length;
+      renderSlide();
+    });
+
+    // 区块入场动效
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 自动轮播（可注释）
+    setInterval(() => {
+      i = (i + 1) % slides.length;
+      renderSlide();
+    }, 4800);
+  </script>
+</body>
+</html>

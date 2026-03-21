@@ -1,0 +1,45 @@
+{
+    "site":  {
+                 "browserTitle":  "椭圆轮播展示",
+                 "bannerTitle":  "HELLO! This is Lotus! Welcome!"
+             },
+    "items":  [
+                  {
+                      "id":  "author",
+                      "enabled":  true,
+                      "order":  1,
+                      "cardTitle":  "MEMEME",
+                      "cardImage":  "./asset/image/cards/author-card.png",
+                      "cardAlt":  "关于作者",
+                      "pageSlug":  "author",
+                      "pageFile":  "pages/content/author.html",
+                      "pageMode":  "generated",
+                      "pageTitle":  "Lotus/渚有潜",
+                      "pageSummary":  "A stupid university student.None.",
+                      "pageLayout":  "image-left",
+                      "pageImage":  "./asset/image/pages/author-page.png",
+                      "pageBody":  [
+                                       "Welcome to my personal site! Just look around!"
+                                   ]
+                  },
+                  {
+                      "id":  "pickbank",
+                      "enabled":  true,
+                      "order":  2,
+                      "cardTitle":  "Pickbank",
+                      "cardImage":  "./asset/image/cards/1.png",
+                      "cardAlt":  "Pickbank",
+                      "pageSlug":  "pickbank",
+                      "pageFile":  "pages/content/pickbank.html",
+                      "pageMode":  "generated",
+                      "pageTitle":  "Pickbank",
+                      "pageSummary":  "这是一个新页面，你可以稍后继续完善内容。",
+                      "pageLayout":  "image-left",
+                      "pageImage":  "./asset/image/cards/1.png",
+                      "pageBody":  [
+                                       "这里是正文第一段。",
+                                       "你可以在管理器中再次编辑这部分内容。"
+                                   ]
+                  }
+              ]
+}
