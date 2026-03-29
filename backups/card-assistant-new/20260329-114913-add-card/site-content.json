@@ -113,27 +113,9 @@
                                    ]
                   },
                   {
-                      "id":  "kindle-page",
-                      "enabled":  true,
-                      "order":  7,
-                      "cardTitle":  "kindle_page",
-                      "cardImage":  "./asset/image/cards/kindle-page-card.jpg",
-                      "cardAlt":  "kindle_page",
-                      "pageSlug":  "kindle-page",
-                      "pageFile":  "https://kindle-page-web.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "kindle_page",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/kindle-page-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
                       "id":  "pickmark",
                       "enabled":  true,
-                      "order":  8,
+                      "order":  7,
                       "cardTitle":  "pickmark",
                       "cardImage":  "./asset/image/cards/pickmark-card.png",
                       "cardAlt":  "pickmark",
@@ -151,7 +133,7 @@
                   {
                       "id":  "pickplan",
                       "enabled":  true,
-                      "order":  9,
+                      "order":  8,
                       "cardTitle":  "Pickplan",
                       "cardImage":  "./asset/image/cards/pickplan-card.jpg",
                       "cardAlt":  "Pickplan",
@@ -169,7 +151,7 @@
                   {
                       "id":  "pickup",
                       "enabled":  true,
-                      "order":  10,
+                      "order":  9,
                       "cardTitle":  "Pickup",
                       "cardImage":  "./asset/image/cards/pickup-card.jpg",
                       "cardAlt":  "Pickup",
@@ -187,7 +169,7 @@
                   {
                       "id":  "pickbank",
                       "enabled":  true,
-                      "order":  11,
+                      "order":  10,
                       "cardTitle":  "Pickbank",
                       "cardImage":  "./asset/image/cards/pickbank-card.jpg",
                       "cardAlt":  "Pickbank",
@@ -205,7 +187,7 @@
                   {
                       "id":  "mindstream",
                       "enabled":  true,
-                      "order":  12,
+                      "order":  11,
                       "cardTitle":  "Mindstream",
                       "cardImage":  "./asset/image/cards/mindstream-card.png",
                       "cardAlt":  "Mindstream",
@@ -223,7 +205,7 @@
                   {
                       "id":  "insight",
                       "enabled":  true,
-                      "order":  13,
+                      "order":  12,
                       "cardTitle":  "Insight",
                       "cardImage":  "./asset/image/cards/insight-card.png",
                       "cardAlt":  "Insight",

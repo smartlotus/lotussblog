@@ -1,0 +1,23 @@
+cd C:\Users\28389\Desktop\mypickapps\webs\mysite
+
+# 1) 退出可能残留的 rebase 状态
+git rebase --abort 2>$null
+
+# 2) 回到远端 main，保留你本地改动（重做一次干净提交）
+git fetch origin
+git reset --soft origin/main
+
+# 3) 忽略构建产物（防止以后再提交超大文件）
+@"
+dist/SiteManagerUI/
+tools/SiteManagerUI/bin/
+tools/SiteManagerUI/obj/
+"@ | Add-Content .gitignore
+
+# 4) 从索引移除大文件/构建目录（本地文件不会被删除）
+git rm -r --cached --ignore-unmatch dist/SiteManagerUI tools/SiteManagerUI/bin tools/SiteManagerUI/obj
+
+# 5) 重新提交并推送
+git add -A
+git commit -m "sync site (exclude large build artifacts)"
+git push --force-with-lease origin main
