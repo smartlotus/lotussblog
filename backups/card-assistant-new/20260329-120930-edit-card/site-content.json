@@ -95,9 +95,27 @@
                                    ]
                   },
                   {
-                      "id":  "item-20260321113014",
+                      "id":  "redegg",
                       "enabled":  true,
                       "order":  6,
+                      "cardTitle":  "Redegg",
+                      "cardImage":  "./asset/image/cards/redegg-card.png",
+                      "cardAlt":  "Redegg",
+                      "pageSlug":  "redegg",
+                      "pageFile":  "https://redegg.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Redegg",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/redegg-card.png",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "item-20260321113014",
+                      "enabled":  true,
+                      "order":  7,
                       "cardTitle":  "泰山派",
                       "cardImage":  "./asset/image/cards/item-20260321113014-card.jpg",
                       "cardAlt":  "泰山派",
@@ -115,7 +133,7 @@
                   {
                       "id":  "kindle-page",
                       "enabled":  true,
-                      "order":  7,
+                      "order":  8,
                       "cardTitle":  "kindle_page",
                       "cardImage":  "./asset/image/cards/kindle-page-card.jpg",
                       "cardAlt":  "kindle_page",
@@ -126,24 +144,6 @@
                       "pageSummary":  "External link page",
                       "pageLayout":  "text-only",
                       "pageImage":  "./asset/image/cards/kindle-page-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "redegg",
-                      "enabled":  true,
-                      "order":  8,
-                      "cardTitle":  "Redegg",
-                      "cardImage":  "./asset/image/cards/redegg-card.png",
-                      "cardAlt":  "Redegg",
-                      "pageSlug":  "redegg",
-                      "pageFile":  "https://redegg.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Redegg",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/redegg-card.png",
                       "pageBody":  [
                                        "This card links to an external URL."
                                    ]

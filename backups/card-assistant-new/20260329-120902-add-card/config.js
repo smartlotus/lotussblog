@@ -6,7 +6,6 @@
   { title: "Sountoz", image: "./asset/image/cards/sountoz-card.png", link: "https://sountoz.pages.dev/", alt: "Sountoz" },
   { title: "泰山派", image: "./asset/image/cards/item-20260321113014-card.jpg", link: "http://taishanpai.pages.dev/", alt: "泰山派" },
   { title: "kindle_page", image: "./asset/image/cards/kindle-page-card.jpg", link: "https://kindle-page-web.pages.dev/", alt: "kindle_page" },
-  { title: "Redegg", image: "./asset/image/cards/redegg-card.png", link: "https://redegg.pages.dev/", alt: "Redegg" },
   { title: "pickmark", image: "./asset/image/cards/pickmark-card.png", link: "https://pickmarksweb.pages.dev/", alt: "pickmark" },
   { title: "Pickplan", image: "./asset/image/cards/pickplan-card.jpg", link: "https://pickplanweb.pages.dev/", alt: "Pickplan" },
   { title: "Pickup", image: "./asset/image/cards/pickup-card.jpg", link: "https://pickupweb.pages.dev/", alt: "Pickup" },

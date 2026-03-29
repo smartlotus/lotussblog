@@ -131,27 +131,9 @@
                                    ]
                   },
                   {
-                      "id":  "redegg",
-                      "enabled":  true,
-                      "order":  8,
-                      "cardTitle":  "Redegg",
-                      "cardImage":  "./asset/image/cards/redegg-card.png",
-                      "cardAlt":  "Redegg",
-                      "pageSlug":  "redegg",
-                      "pageFile":  "https://redegg.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Redegg",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/redegg-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
                       "id":  "pickmark",
                       "enabled":  true,
-                      "order":  9,
+                      "order":  8,
                       "cardTitle":  "pickmark",
                       "cardImage":  "./asset/image/cards/pickmark-card.png",
                       "cardAlt":  "pickmark",
@@ -169,7 +151,7 @@
                   {
                       "id":  "pickplan",
                       "enabled":  true,
-                      "order":  10,
+                      "order":  9,
                       "cardTitle":  "Pickplan",
                       "cardImage":  "./asset/image/cards/pickplan-card.jpg",
                       "cardAlt":  "Pickplan",
@@ -180,6 +162,24 @@
                       "pageSummary":  "External link page",
                       "pageLayout":  "text-only",
                       "pageImage":  "./asset/image/cards/pickplan-card.jpg",
+                      "pageBody":  [
+                                       "This card links to an external URL."
+                                   ]
+                  },
+                  {
+                      "id":  "redegg",
+                      "enabled":  true,
+                      "order":  10,
+                      "cardTitle":  "Redegg",
+                      "cardImage":  "./asset/image/cards/redegg-card.png",
+                      "cardAlt":  "Redegg",
+                      "pageSlug":  "redegg",
+                      "pageFile":  "https://redegg.pages.dev/",
+                      "pageMode":  "external-link",
+                      "pageTitle":  "Redegg",
+                      "pageSummary":  "External link page",
+                      "pageLayout":  "text-only",
+                      "pageImage":  "./asset/image/cards/redegg-card.png",
                       "pageBody":  [
                                        "This card links to an external URL."
                                    ]
