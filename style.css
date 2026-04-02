@@ -38,6 +38,123 @@ body {
   background-size: 300px 300px;
 }
 
+.startup-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.startup-splash.is-fading-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.startup-splash-inner {
+  width: min(440px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  opacity: 1;
+  transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.startup-splash.is-white-stage .startup-splash-inner {
+  opacity: 0;
+}
+
+.startup-video-shell {
+  width: min(400px, 82vw);
+  aspect-ratio: var(--startup-video-ratio, 16 / 9);
+  max-height: min(800px, 78vh);
+  border-radius: 0;
+  border: 1px solid #000;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: none;
+}
+
+.startup-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(0.984);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.startup-splash.is-playing .startup-video {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.startup-splash.is-video-leaving .startup-video {
+  opacity: 0;
+  transform: scale(1.01);
+}
+
+.startup-progress {
+  width: min(380px, 84vw);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.startup-greeting {
+  width: min(900px, 92vw);
+  margin: 0;
+  text-align: center;
+  color: #000;
+  font-family: Millik, Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: 0.005em;
+}
+
+.startup-greeting-line {
+  display: block;
+}
+
+.startup-greeting-line + .startup-greeting-line {
+  margin-top: 0.16em;
+}
+
+.startup-progress-track {
+  width: 100%;
+  height: 12px;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.startup-progress-fill {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.startup-progress-text {
+  color: #000;
+  font-family: "SF Pro Display", "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  min-width: 4ch;
+  text-align: center;
+}
+
 #flow-canvas {
   position: fixed;
   inset: 0;
@@ -563,6 +680,25 @@ body {
     top: max(10px, env(safe-area-inset-top, 0px));
     right: max(10px, env(safe-area-inset-right, 0px));
   }
+
+  .startup-splash-inner {
+    gap: 24px;
+  }
+
+  .startup-video-shell {
+    width: min(400px, 88vw);
+    border-radius: 0;
+  }
+
+  .startup-progress {
+    width: min(360px, 88vw);
+  }
+
+  .startup-greeting {
+    width: min(92vw, 640px);
+    font-size: clamp(2rem, 6.6vw, 2.8rem);
+    line-height: 1.2;
+  }
 }
 
 @media (max-width: 480px) {
@@ -593,6 +729,14 @@ body {
   }
   100% {
     transform: translate(13.39vw, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startup-splash,
+  .startup-video,
+  .startup-progress-fill {
+    transition-duration: 0.01ms !important;
   }
 }
 

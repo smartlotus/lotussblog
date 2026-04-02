@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A site of Lotus</title>
+  <title>This is lotus,welcome to my site!</title>
   <link rel="icon" type="image/jpeg" href="./asset/image/LOGO/mylogo.jpg">
   <link rel="shortcut icon" type="image/jpeg" href="./asset/image/LOGO/mylogo.jpg">
   <link rel="stylesheet" href="style.css">
@@ -20,7 +20,7 @@
     </svg>
   </button>
 
-  <div class="startup-splash" id="startup-splash" role="status" aria-label="页面加载中 1%">
+  <div class="startup-splash" id="startup-splash" role="status" aria-label="页面加载中 0%">
     <div class="startup-splash-inner">
       <div class="startup-video-shell">
         <video
@@ -35,16 +35,12 @@
           <source src="./vedio00.mp4" type="video/mp4">
         </video>
       </div>
-      <p class="startup-greeting">
-        <span class="startup-greeting-line">Hello, this is Lotus.</span>
-        <span class="startup-greeting-line">Welcome to my page!</span>
-        <span class="startup-greeting-line">Let us have something fun!</span>
-      </p>
+      <p class="startup-greeting">Hello,this is Lotus.Welcome to my page!Let us have something fun!</p>
       <div class="startup-progress" aria-hidden="true">
         <div class="startup-progress-track">
           <div id="startup-progress-fill" class="startup-progress-fill"></div>
         </div>
-        <p id="startup-progress-text" class="startup-progress-text">1%</p>
+        <p id="startup-progress-text" class="startup-progress-text">0%</p>
       </div>
     </div>
   </div>
@@ -130,7 +126,6 @@
 
       const hardTimeoutMs = 15000;
       const fadeLeadTime = 0.68;
-      const progressEasing = 0.225;
       let targetProgress = 0;
       let smoothProgress = 0;
       let rafId = 0;
@@ -144,7 +139,7 @@
 
       function render(progress) {
         const ratio = clamp(progress, 0, 1);
-        const percent = clamp(Math.round(ratio * 100), 1, 100);
+        const percent = Math.round(ratio * 100);
         progressFill.style.transform = `scaleX(${ratio.toFixed(4)})`;
         progressText.textContent = `${percent}%`;
         splash.setAttribute('aria-label', `页面加载中 ${percent}%`);
@@ -157,7 +152,7 @@
 
       function updateSmoothProgress() {
         rafId = 0;
-        smoothProgress += (targetProgress - smoothProgress) * progressEasing;
+        smoothProgress += (targetProgress - smoothProgress) * 0.18;
 
         if (Math.abs(targetProgress - smoothProgress) < 0.001) {
           smoothProgress = targetProgress;
@@ -220,16 +215,15 @@
         smoothProgress = 1;
         render(1);
         splash.classList.add('is-video-leaving');
-        splash.classList.add('is-white-stage');
 
         window.setTimeout(() => {
           splash.classList.add('is-fading-out');
           splash.addEventListener('transitionend', onSplashTransitionEnd, { once: true });
-        }, forceFast ? 180 : 420);
+        }, forceFast ? 80 : 220);
 
         window.setTimeout(() => {
           if (document.body.contains(splash)) cleanup();
-        }, forceFast ? 1400 : 1750);
+        }, 1500);
       }
 
       video.addEventListener('canplay', () => {
@@ -910,7 +904,6 @@
 </body>
 
 </html>
-
 
 
 
