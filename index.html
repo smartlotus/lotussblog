@@ -58,6 +58,13 @@
       <div class="img-list img-wrapper"></div>
     </div>
 
+    <button id="section-back-btn" class="section-back-btn" type="button" aria-label="返回上一级" title="返回上一级">
+      <svg class="section-back-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 7L5 12L10 17" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 12H14C17.314 12 20 14.686 20 18" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
     <div class="btn-group">
       <button class="last btn" type="button" aria-label="上一张">
         <svg class="icon left" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
@@ -125,8 +132,21 @@
       const videoShell = splash?.querySelector('.startup-video-shell') || null;
       const progressFill = document.getElementById('startup-progress-fill');
       const progressText = document.getElementById('startup-progress-text');
+      const splashSessionKey = 'lotus-splash-played-v1';
 
       if (!splash || !video || !progressFill || !progressText) return;
+
+      let splashAlreadyPlayed = false;
+      try {
+        splashAlreadyPlayed = window.sessionStorage.getItem(splashSessionKey) === '1';
+      } catch {
+        splashAlreadyPlayed = false;
+      }
+
+      if (splashAlreadyPlayed) {
+        splash.remove();
+        return;
+      }
 
       const hardTimeoutMs = 15000;
       const fadeLeadTime = 0.68;
@@ -215,6 +235,11 @@
         if (isFinished) return;
         isFinished = true;
         window.clearTimeout(hardTimeoutId);
+        try {
+          window.sessionStorage.setItem(splashSessionKey, '1');
+        } catch {
+          // ignore storage write failures
+        }
 
         targetProgress = 1;
         smoothProgress = 1;
@@ -271,6 +296,7 @@
       const banner = document.querySelector('#banner');
       const prevBtn = document.querySelector('.last');
       const nextBtn = document.querySelector('.next');
+      const sectionBackBtn = document.getElementById('section-back-btn');
       const btnGroup = document.querySelector('.btn-group');
       const progressWrap = document.querySelector('.carousel-progress');
       const progressFill = document.querySelector('.carousel-progress-fill');
@@ -278,15 +304,34 @@
       const scrollHint = document.querySelector('.scroll-hint');
       const supportPanels = Array.from(document.querySelectorAll('.support-panel'));
 
-      if (!imgList || !banner || !prevBtn || !nextBtn || !btnGroup || !Array.isArray(CARDS) || CARDS.length === 0) return;
+      if (!imgList || !banner || !prevBtn || !nextBtn || !btnGroup || !sectionBackBtn) return;
 
       const fallbackImage = './asset/image/cards/1.png';
+      const defaultCards = Array.isArray(CARDS) ? CARDS : [];
+      const rawSections = Array.isArray(HOME_SECTIONS) && HOME_SECTIONS.length > 0
+        ? HOME_SECTIONS
+        : [
+            {
+              id: 'projects',
+              title: '项目板块',
+              description: '进入项目集合',
+              cover: fallbackImage,
+              cards: defaultCards
+            }
+          ];
+
       let unitPx = 1;
       let buttonLocked = false;
       let progressRaf = 0;
       let visibilityRaf = 0;
       let touchSession = null;
       let suppressClickUntil = 0;
+      let activeCards = [];
+      let sectionEnteredByPush = false;
+
+      const sections = [];
+      const sectionMap = new Map();
+      let currentSectionId = '';
 
       function clamp(num, min, max) {
         return Math.max(min, Math.min(max, num));
@@ -329,19 +374,168 @@
         const alt = String(card?.alt || '').trim() || title;
         const image = normalizePath(card?.image) || fallbackImage;
         const link = normalizePath(card?.link) || '#';
-        return { title, alt, image, link };
+        return {
+          title,
+          alt,
+          image,
+          link,
+          action: 'open-link',
+          sectionId: ''
+        };
       }
 
-      const cards = CARDS.map((card, index) => normalizeCard(card, index));
+      function normalizeSection(section, index) {
+        const normalizedId = String(section?.id || `section-${index + 1}`)
+          .trim()
+          .toLowerCase()
+          .replace(/[^\p{L}\p{N}_-]/gu, '-')
+          .replace(/^-+|-+$/g, '') || `section-${index + 1}`;
+        const title = String(section?.title || `分类 ${index + 1}`).trim();
+        const description = String(section?.description || '进入分类').trim();
+        const cover = normalizePath(section?.cover) || fallbackImage;
+        const cards = Array.isArray(section?.cards)
+          ? section.cards.map((card, cardIndex) => normalizeCard(card, cardIndex))
+          : [];
+        return {
+          id: normalizedId,
+          title,
+          description,
+          cover,
+          cards
+        };
+      }
 
-      imgList.innerHTML = cards
-        .map((card) => `
-          <a class="img-box" href="${escapeHtml(card.link)}">
+      function buildSectionOverviewCards() {
+        return sections.map((section) => ({
+          title: section.title,
+          alt: section.title,
+          image: section.cover,
+          link: '#',
+          action: 'enter-section',
+          sectionId: section.id
+        }));
+      }
+
+      function buildSectionDetailCards(section) {
+        if (!Array.isArray(section.cards) || section.cards.length === 0) {
+          return [
+            {
+              title: `${section.title} · 内容建设中`,
+              alt: `${section.title} · 内容建设中`,
+              image: section.cover || fallbackImage,
+              link: '#',
+              action: 'noop',
+              sectionId: ''
+            }
+          ];
+        }
+
+        return section.cards;
+      }
+
+      function renderCards(nextCards, behavior = 'auto') {
+        activeCards = Array.isArray(nextCards) ? nextCards : [];
+        if (activeCards.length === 0) {
+          activeCards = [
+            {
+              title: '内容建设中',
+              alt: '内容建设中',
+              image: fallbackImage,
+              link: '#',
+              action: 'noop',
+              sectionId: ''
+            }
+          ];
+        }
+
+        imgList.innerHTML = activeCards
+          .map((card) => `
+          <a
+            class="img-box"
+            href="${escapeHtml(card.link || '#')}"
+            data-action="${escapeHtml(card.action || '')}"
+            data-section-id="${escapeHtml(card.sectionId || '')}"
+          >
             <div class="info"><h3>${escapeHtml(card.title)}</h3></div>
             <img src="${escapeHtml(card.image)}" alt="${escapeHtml(card.alt)}" loading="lazy" decoding="async">
           </a>
         `)
-        .join('');
+          .join('');
+
+        refreshMetrics();
+        scrollToIndex(0, behavior);
+        requestProgressUpdate();
+      }
+
+      function readCarouselState(inputState) {
+        const state = inputState && typeof inputState === 'object' ? inputState : null;
+        if (!state) {
+          return { view: 'overview', sectionId: '' };
+        }
+
+        const view = state.carouselView === 'section' ? 'section' : 'overview';
+        const sectionId = typeof state.carouselSectionId === 'string' ? state.carouselSectionId : '';
+        return { view, sectionId };
+      }
+
+      function syncCarouselHistory(view, sectionId = '', strategy = 'replace') {
+        if (strategy === 'none' || !window.history || typeof window.history.replaceState !== 'function') {
+          return;
+        }
+
+        const baseState = window.history.state && typeof window.history.state === 'object'
+          ? window.history.state
+          : {};
+        const nextState = {
+          ...baseState,
+          carouselView: view === 'section' ? 'section' : 'overview',
+          carouselSectionId: view === 'section' ? sectionId : ''
+        };
+
+        if (strategy === 'push' && typeof window.history.pushState === 'function') {
+          window.history.pushState(nextState, '');
+          return;
+        }
+
+        window.history.replaceState(nextState, '');
+      }
+
+      function showSectionOverview({ behavior = 'auto', historyStrategy = 'replace' } = {}) {
+        currentSectionId = '';
+        sectionEnteredByPush = false;
+        renderCards(buildSectionOverviewCards(), behavior);
+        syncCarouselHistory('overview', '', historyStrategy);
+        refreshSectionBackButton();
+      }
+
+      function openSection(sectionId, { behavior = 'auto', historyStrategy = 'push' } = {}) {
+        const section = sectionMap.get(sectionId);
+        if (!section) return;
+        currentSectionId = section.id;
+        sectionEnteredByPush = historyStrategy === 'push';
+        renderCards(buildSectionDetailCards(section), behavior);
+        syncCarouselHistory('section', section.id, historyStrategy);
+        refreshSectionBackButton();
+      }
+
+      function refreshSectionBackButton() {
+        const shouldShow = !!currentSectionId;
+        sectionBackBtn.classList.toggle('is-visible', shouldShow);
+        sectionBackBtn.disabled = !shouldShow;
+        sectionBackBtn.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      }
+
+      function backToOverviewByArrow() {
+        if (!currentSectionId) return;
+
+        if (sectionEnteredByPush && window.history.length > 1) {
+          sectionEnteredByPush = false;
+          window.history.back();
+          return;
+        }
+
+        showSectionOverview({ behavior: 'auto', historyStrategy: 'replace' });
+      }
 
       function refreshMetrics() {
         const styles = getComputedStyle(root);
@@ -354,18 +548,20 @@
       }
 
       function getCurrentIndex() {
-        return clamp(Math.round(imgList.scrollLeft / unitPx), 0, cards.length - 1);
+        const maxIndex = Math.max(0, activeCards.length - 1);
+        return clamp(Math.round(imgList.scrollLeft / unitPx), 0, maxIndex);
       }
 
       function updateProgress() {
+        const total = Math.max(1, activeCards.length);
         const current = getCurrentIndex();
-        const ratio = cards.length <= 1 ? 1 : current / (cards.length - 1);
+        const ratio = total <= 1 ? 1 : current / (total - 1);
 
         if (progressFill) {
           progressFill.style.transform = `scaleX(${ratio.toFixed(5)})`;
         }
         if (progressText) {
-          progressText.textContent = `${current + 1} / ${cards.length}`;
+          progressText.textContent = `${current + 1} / ${total}`;
         }
       }
 
@@ -378,7 +574,8 @@
       }
 
       function scrollToIndex(index, behavior = 'smooth') {
-        const targetIndex = clamp(index, 0, cards.length - 1);
+        const maxIndex = Math.max(0, activeCards.length - 1);
+        const targetIndex = clamp(index, 0, maxIndex);
         imgList.scrollTo({
           left: targetIndex * unitPx,
           behavior
@@ -447,6 +644,7 @@
           : window.innerHeight - 40;
         const shouldHide = rect.top <= triggerLine;
         btnGroup.classList.toggle('is-hidden', shouldHide);
+        sectionBackBtn.classList.toggle('is-hidden', shouldHide);
         progressWrap?.classList.toggle('is-hidden', shouldHide);
         scrollHint?.classList.toggle('is-hidden', shouldHide);
       }
@@ -514,10 +712,39 @@
         touchSession = null;
       }
 
-      refreshMetrics();
-      scrollToIndex(0, 'auto');
+      rawSections
+        .map((section, index) => normalizeSection(section, index))
+        .forEach((section) => {
+          if (!sectionMap.has(section.id)) {
+            sectionMap.set(section.id, section);
+            sections.push(section);
+          }
+        });
+
+      if (sections.length === 0) {
+        const fallbackSection = normalizeSection(
+          {
+            id: 'projects',
+            title: '项目板块',
+            description: '进入项目集合',
+            cover: fallbackImage,
+            cards: defaultCards
+          },
+          0
+        );
+        sectionMap.set(fallbackSection.id, fallbackSection);
+        sections.push(fallbackSection);
+      }
+
+      if (sections.length === 0) return;
+
+      const initialState = readCarouselState(window.history.state);
+      if (initialState.view === 'section' && sectionMap.has(initialState.sectionId)) {
+        openSection(initialState.sectionId, { behavior: 'auto', historyStrategy: 'replace' });
+      } else {
+        showSectionOverview({ behavior: 'auto', historyStrategy: 'replace' });
+      }
       syncButtonBottom();
-      requestProgressUpdate();
       requestVisibilityUpdate();
 
       window.setTimeout(() => {
@@ -529,6 +756,7 @@
 
       nextBtn.addEventListener('click', () => throttle(slideNext));
       prevBtn.addEventListener('click', () => throttle(slidePrev));
+      sectionBackBtn.addEventListener('click', backToOverviewByArrow);
       imgList.addEventListener('scroll', requestProgressUpdate, { passive: true });
       banner.addEventListener('wheel', onWheel, { passive: false });
       imgList.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -539,8 +767,30 @@
         if (performance.now() < suppressClickUntil) {
           event.preventDefault();
           event.stopPropagation();
+          return;
+        }
+
+        const box = event.target.closest('.img-box');
+        if (!box || !imgList.contains(box)) return;
+
+        const action = box.dataset.action || '';
+        if (!action || action === 'open-link' || action === 'noop') return;
+
+        event.preventDefault();
+
+        if (action === 'enter-section') {
+          openSection(box.dataset.sectionId || '', { behavior: 'auto', historyStrategy: 'push' });
         }
       }, true);
+      window.addEventListener('popstate', () => {
+        const state = readCarouselState(window.history.state);
+        if (state.view === 'section' && sectionMap.has(state.sectionId)) {
+          openSection(state.sectionId, { behavior: 'auto', historyStrategy: 'none' });
+          return;
+        }
+
+        showSectionOverview({ behavior: 'auto', historyStrategy: 'none' });
+      });
       window.addEventListener('scroll', requestVisibilityUpdate, { passive: true });
       window.addEventListener('resize', () => {
         const keepIndex = getCurrentIndex();
@@ -910,6 +1160,13 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
 
 
 

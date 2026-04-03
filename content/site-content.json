@@ -1,260 +1,373 @@
 {
-    "site":  {
-                 "browserTitle":  "A site of Lotus",
-                 "bannerTitle":  "Attention is all you need."
-             },
-    "items":  [
-                  {
-                      "id":  "lotus-page",
-                      "enabled":  true,
-                      "order":  1,
-                      "cardTitle":  "Lotus\u0027page",
-                      "cardImage":  "./asset/image/cards/lotus-page-card.png",
-                      "cardAlt":  "Lotus\u0027page",
-                      "pageSlug":  "lotus-page",
-                      "pageFile":  "https://lotusspagefinal.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Lotus\u0027page",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/lotus-page-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "lerobot",
-                      "enabled":  true,
-                      "order":  2,
-                      "cardTitle":  "Lerobot",
-                      "cardImage":  "./asset/image/cards/lerobot-card.png",
-                      "cardAlt":  "Lerobot",
-                      "pageSlug":  "lerobot",
-                      "pageFile":  "https://lerobot.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Lerobot",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/lerobot-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "item-20260321112945",
-                      "enabled":  true,
-                      "order":  3,
-                      "cardTitle":  "庐山派",
-                      "cardImage":  "./asset/image/cards/item-20260321112945-card.png",
-                      "cardAlt":  "庐山派",
-                      "pageSlug":  "item-20260321112945",
-                      "pageFile":  "https://lushanpai.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "庐山派",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/item-20260321112945-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "wifi",
-                      "enabled":  true,
-                      "order":  4,
-                      "cardTitle":  "偷偷地Wifi",
-                      "cardImage":  "./asset/image/cards/wifi-card.jpg",
-                      "cardAlt":  "偷偷地Wifi",
-                      "pageSlug":  "wifi",
-                      "pageFile":  "https://sushe-wifi.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "偷偷地Wifi",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/wifi-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "sountoz",
-                      "enabled":  true,
-                      "order":  5,
-                      "cardTitle":  "Sountoz",
-                      "cardImage":  "./asset/image/cards/sountoz-card.png",
-                      "cardAlt":  "Sountoz",
-                      "pageSlug":  "sountoz",
-                      "pageFile":  "https://sountoz.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Sountoz",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/sountoz-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "item-20260321113014",
-                      "enabled":  true,
-                      "order":  6,
-                      "cardTitle":  "泰山派",
-                      "cardImage":  "./asset/image/cards/item-20260321113014-card.jpg",
-                      "cardAlt":  "泰山派",
-                      "pageSlug":  "item-20260321113014",
-                      "pageFile":  "http://taishanpai.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "泰山派",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/item-20260321113014-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "kindle-page",
-                      "enabled":  true,
-                      "order":  7,
-                      "cardTitle":  "kindle_page",
-                      "cardImage":  "./asset/image/cards/kindle-page-card.jpg",
-                      "cardAlt":  "kindle_page",
-                      "pageSlug":  "kindle-page",
-                      "pageFile":  "https://kindle-page-web.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "kindle_page",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/kindle-page-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "redegg",
-                      "enabled":  true,
-                      "order":  8,
-                      "cardTitle":  "Redegg",
-                      "cardImage":  "./asset/image/cards/redegg-card.png",
-                      "cardAlt":  "Redegg",
-                      "pageSlug":  "redegg",
-                      "pageFile":  "https://redegg.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Redegg",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/redegg-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "pickmark",
-                      "enabled":  true,
-                      "order":  9,
-                      "cardTitle":  "pickmark",
-                      "cardImage":  "./asset/image/cards/pickmark-card.png",
-                      "cardAlt":  "pickmark",
-                      "pageSlug":  "pickmark",
-                      "pageFile":  "https://pickmarksweb.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "pickmark",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/pickmark-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "pickplan",
-                      "enabled":  true,
-                      "order":  10,
-                      "cardTitle":  "Pickplan",
-                      "cardImage":  "./asset/image/cards/pickplan-card.jpg",
-                      "cardAlt":  "Pickplan",
-                      "pageSlug":  "pickplan",
-                      "pageFile":  "https://pickplanweb.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Pickplan",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/pickplan-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "pickup",
-                      "enabled":  true,
-                      "order":  11,
-                      "cardTitle":  "Pickup",
-                      "cardImage":  "./asset/image/cards/pickup-card.jpg",
-                      "cardAlt":  "Pickup",
-                      "pageSlug":  "pickup",
-                      "pageFile":  "https://pickupweb.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Pickup",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/pickup-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "pickbank",
-                      "enabled":  true,
-                      "order":  12,
-                      "cardTitle":  "Pickbank",
-                      "cardImage":  "./asset/image/cards/pickbank-card.jpg",
-                      "cardAlt":  "Pickbank",
-                      "pageSlug":  "pickbank",
-                      "pageFile":  "https://pickbankwebs.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Pickbank",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/pickbank-card.jpg",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "mindstream",
-                      "enabled":  true,
-                      "order":  13,
-                      "cardTitle":  "Mindstream",
-                      "cardImage":  "./asset/image/cards/mindstream-card.png",
-                      "cardAlt":  "Mindstream",
-                      "pageSlug":  "mindstream",
-                      "pageFile":  "https://lotussmindstream.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Mindstream",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/mindstream-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  },
-                  {
-                      "id":  "insight",
-                      "enabled":  true,
-                      "order":  14,
-                      "cardTitle":  "Insight",
-                      "cardImage":  "./asset/image/cards/insight-card.png",
-                      "cardAlt":  "Insight",
-                      "pageSlug":  "insight",
-                      "pageFile":  "https://lotussinsight.pages.dev/",
-                      "pageMode":  "external-link",
-                      "pageTitle":  "Insight",
-                      "pageSummary":  "External link page",
-                      "pageLayout":  "text-only",
-                      "pageImage":  "./asset/image/cards/insight-card.png",
-                      "pageBody":  [
-                                       "This card links to an external URL."
-                                   ]
-                  }
-              ]
+  "site": {
+    "browserTitle": "A site of Lotus",
+    "bannerTitle": "Attention is all you need."
+  },
+  "sections": [
+    {
+      "id": "projects",
+      "enabled": true,
+      "order": 1,
+      "title": "\u9879\u76EEing",
+      "description": "\u8FDB\u5165\u9879\u76EE\u5408\u96C6\u5E76\u8DF3\u8F6C\u5230\u4E0D\u540C\u7AD9\u70B9",
+      "cover": "./asset/image/cards/projects-section.png"
+    },
+    {
+      "id": "author",
+      "enabled": true,
+      "order": 2,
+      "title": "My page",
+      "description": "\u8FDB\u5165\u4F5C\u8005\u76F8\u5173\u9875\u9762\u4E0E\u5185\u5BB9\u7D22\u5F15",
+      "cover": "./asset/image/cards/author-section.png"
+    },
+    {
+      "id": "\u5B8C\u7ED3ed",
+      "enabled": true,
+      "order": 3,
+      "title": "\u5B8C\u7ED3ed",
+      "description": "",
+      "cover": "./asset/image/cards/\u5B8C\u7ED3ed-section.png"
+    },
+    {
+      "id": "\u5C0F\u73A9\u610F\u513F",
+      "enabled": true,
+      "order": 4,
+      "title": "\u5C0F\u73A9\u610F\u513F",
+      "description": "",
+      "cover": "./asset/image/cards/\u5C0F\u73A9\u610F\u513F-section.png"
+    },
+    {
+      "id": "funny-staffs",
+      "enabled": true,
+      "order": 5,
+      "title": "funny_staffs",
+      "description": "",
+      "cover": "./asset/image/cards/funny-staffs-section.jpg"
+    }
+  ],
+  "items": [
+    {
+      "id": "lerobot",
+      "sectionId": "projects",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "Lerobot",
+      "cardImage": "./asset/image/cards/lerobot-card.png",
+      "cardAlt": "Lerobot",
+      "pageSlug": "lerobot",
+      "pageFile": "https://lerobot.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Lerobot",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/lerobot-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "item-20260321112945",
+      "sectionId": "projects",
+      "enabled": true,
+      "order": 2,
+      "cardTitle": "\u5E90\u5C71\u6D3E",
+      "cardImage": "./asset/image/cards/item-20260321112945-card.png",
+      "cardAlt": "\u5E90\u5C71\u6D3E",
+      "pageSlug": "item-20260321112945",
+      "pageFile": "https://lushanpai.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "\u5E90\u5C71\u6D3E",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/item-20260321112945-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "item-20260321113014",
+      "sectionId": "projects",
+      "enabled": true,
+      "order": 3,
+      "cardTitle": "\u6CF0\u5C71\u6D3E",
+      "cardImage": "./asset/image/cards/item-20260321113014-card.jpg",
+      "cardAlt": "\u6CF0\u5C71\u6D3E",
+      "pageSlug": "item-20260321113014",
+      "pageFile": "http://taishanpai.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "\u6CF0\u5C71\u6D3E",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/item-20260321113014-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "lotus-page",
+      "sectionId": "author",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "Lotus\u0027page",
+      "cardImage": "./asset/image/cards/lotus-page-card.png",
+      "cardAlt": "Lotus\u0027page",
+      "pageSlug": "lotus-page",
+      "pageFile": "https://lotusspagefinal.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Lotus\u0027page",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/lotus-page-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "wifi",
+      "sectionId": "\u5B8C\u7ED3ed",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "\u5077\u5077\u5730Wifi",
+      "cardImage": "./asset/image/cards/wifi-card.jpg",
+      "cardAlt": "\u5077\u5077\u5730Wifi",
+      "pageSlug": "wifi",
+      "pageFile": "https://sushe-wifi.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "\u5077\u5077\u5730Wifi",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/wifi-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "pickplan",
+      "sectionId": "\u5B8C\u7ED3ed",
+      "enabled": true,
+      "order": 2,
+      "cardTitle": "Pickplan",
+      "cardImage": "./asset/image/cards/pickplan-card.jpg",
+      "cardAlt": "Pickplan",
+      "pageSlug": "pickplan",
+      "pageFile": "https://pickplanweb.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Pickplan",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/pickplan-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "pickup",
+      "sectionId": "\u5B8C\u7ED3ed",
+      "enabled": true,
+      "order": 3,
+      "cardTitle": "Pickup",
+      "cardImage": "./asset/image/cards/pickup-card.jpg",
+      "cardAlt": "Pickup",
+      "pageSlug": "pickup",
+      "pageFile": "https://pickupweb.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Pickup",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/pickup-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "pickbank",
+      "sectionId": "\u5B8C\u7ED3ed",
+      "enabled": true,
+      "order": 4,
+      "cardTitle": "Pickbank",
+      "cardImage": "./asset/image/cards/pickbank-card.jpg",
+      "cardAlt": "Pickbank",
+      "pageSlug": "pickbank",
+      "pageFile": "https://pickbankwebs.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Pickbank",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/pickbank-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "sountoz",
+      "sectionId": "\u5C0F\u73A9\u610F\u513F",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "Sountoz",
+      "cardImage": "./asset/image/cards/sountoz-card.png",
+      "cardAlt": "Sountoz",
+      "pageSlug": "sountoz",
+      "pageFile": "https://sountoz.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Sountoz",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/sountoz-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "kindle-page",
+      "sectionId": "\u5C0F\u73A9\u610F\u513F",
+      "enabled": true,
+      "order": 2,
+      "cardTitle": "kindle_page",
+      "cardImage": "./asset/image/cards/kindle-page-card.jpg",
+      "cardAlt": "kindle_page",
+      "pageSlug": "kindle-page",
+      "pageFile": "https://kindle-page-web.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "kindle_page",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/kindle-page-card.jpg",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "redegg",
+      "sectionId": "\u5C0F\u73A9\u610F\u513F",
+      "enabled": true,
+      "order": 3,
+      "cardTitle": "Redegg",
+      "cardImage": "./asset/image/cards/redegg-card.png",
+      "cardAlt": "Redegg",
+      "pageSlug": "redegg",
+      "pageFile": "https://redegg.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Redegg",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/redegg-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "pickmark",
+      "sectionId": "\u5C0F\u73A9\u610F\u513F",
+      "enabled": true,
+      "order": 4,
+      "cardTitle": "pickmark",
+      "cardImage": "./asset/image/cards/pickmark-card.png",
+      "cardAlt": "pickmark",
+      "pageSlug": "pickmark",
+      "pageFile": "https://pickmarksweb.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "pickmark",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/pickmark-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "mindstream",
+      "sectionId": "funny-staffs",
+      "enabled": true,
+      "order": 1,
+      "cardTitle": "Mindstream",
+      "cardImage": "./asset/image/cards/mindstream-card.png",
+      "cardAlt": "Mindstream",
+      "pageSlug": "mindstream",
+      "pageFile": "https://lotussmindstream.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Mindstream",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/mindstream-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "insight",
+      "sectionId": "funny-staffs",
+      "enabled": true,
+      "order": 2,
+      "cardTitle": "Insight",
+      "cardImage": "./asset/image/cards/insight-card.png",
+      "cardAlt": "Insight",
+      "pageSlug": "insight",
+      "pageFile": "https://lotussinsight.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "Insight",
+      "pageSummary": "External link page",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/insight-card.png",
+      "pageBody": [
+        "This card links to an external URL."
+      ]
+    },
+    {
+      "id": "mymusic",
+      "sectionId": "funny-staffs",
+      "enabled": true,
+      "order": 3,
+      "cardTitle": "mymusic",
+      "cardImage": "./asset/image/cards/mymusic-card.png",
+      "cardAlt": "mymusic",
+      "pageSlug": "mymusic",
+      "pageFile": "https://mymusic-6q3.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "mymusic",
+      "pageSummary": "\u5916\u90E8\u94FE\u63A5\u9875\u9762",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/mymusic-card.png",
+      "pageBody": [
+        "\u8BE5\u5361\u7247\u4F1A\u8DF3\u8F6C\u5230\u5916\u90E8\u7F51\u9875\u3002"
+      ]
+    },
+    {
+      "id": "myvedio",
+      "sectionId": "funny-staffs",
+      "enabled": true,
+      "order": 4,
+      "cardTitle": "myvedio",
+      "cardImage": "./asset/image/cards/myvedio-card.png",
+      "cardAlt": "myvedio",
+      "pageSlug": "myvedio",
+      "pageFile": "https://myvedio.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "myvedio",
+      "pageSummary": "\u5916\u90E8\u94FE\u63A5\u9875\u9762",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/myvedio-card.png",
+      "pageBody": [
+        "\u8BE5\u5361\u7247\u4F1A\u8DF3\u8F6C\u5230\u5916\u90E8\u7F51\u9875\u3002"
+      ]
+    },
+    {
+      "id": "writings",
+      "sectionId": "funny-staffs",
+      "enabled": true,
+      "order": 5,
+      "cardTitle": "writings",
+      "cardImage": "./asset/image/cards/writings-card.png",
+      "cardAlt": "writings",
+      "pageSlug": "writings",
+      "pageFile": "https://writings-793.pages.dev/",
+      "pageMode": "external-link",
+      "pageTitle": "writings",
+      "pageSummary": "\u5916\u90E8\u94FE\u63A5\u9875\u9762",
+      "pageLayout": "text-only",
+      "pageImage": "./asset/image/cards/writings-card.png",
+      "pageBody": [
+        "\u8BE5\u5361\u7247\u4F1A\u8DF3\u8F6C\u5230\u5916\u90E8\u7F51\u9875\u3002"
+      ]
+    }
+  ]
 }

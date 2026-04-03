@@ -98,11 +98,17 @@ function Read-SiteData {
     }
     $raw = Get-Content -Raw -Encoding utf8 $paths.DataFile
     $data = $raw | ConvertFrom-Json
-    if ($null -eq $data.site) {
+    $siteProp = $data.PSObject.Properties["site"]
+    if ($null -eq $siteProp) {
         $data | Add-Member -MemberType NoteProperty -Name site -Value ([pscustomobject]@{})
     }
-    if ($null -eq $data.items) {
+    $itemsProp = $data.PSObject.Properties["items"]
+    if ($null -eq $itemsProp) {
         $data | Add-Member -MemberType NoteProperty -Name items -Value @()
+    }
+    $sectionsProp = $data.PSObject.Properties["sections"]
+    if ($null -eq $sectionsProp) {
+        $data | Add-Member -MemberType NoteProperty -Name sections -Value @()
     }
     return $data
 }
@@ -121,13 +127,197 @@ function Save-SiteData {
 
 function Normalize-ItemsOrder {
     param([object]$Data)
-    $sorted = @($Data.items | Sort-Object order, cardTitle)
+    $orderedSections = @($Data.sections | Sort-Object order, title)
+    $sectionIds = @{}
+    foreach ($section in $orderedSections) {
+        $sectionIds[[string]$section.id] = $true
+    }
+
+    $normalizedItems = @()
+    foreach ($section in $orderedSections) {
+        $sectionItems = @($Data.items | Where-Object { [string]$_.sectionId -eq [string]$section.id } | Sort-Object order, cardTitle)
+        $counter = 1
+        foreach ($item in $sectionItems) {
+            $item.order = $counter
+            $counter++
+        }
+        $normalizedItems += $sectionItems
+    }
+
+    $ungroupedItems = @($Data.items | Where-Object {
+            [string]::IsNullOrWhiteSpace([string]$_.sectionId) -or -not $sectionIds.ContainsKey([string]$_.sectionId)
+        } | Sort-Object order, cardTitle)
+    $ungroupedCounter = 1
+    foreach ($item in $ungroupedItems) {
+        $item.order = $ungroupedCounter
+        $ungroupedCounter++
+    }
+    $normalizedItems += $ungroupedItems
+    $Data.items = $normalizedItems
+}
+
+function Normalize-Sections {
+    param([object]$Data)
+
+    if ($null -eq $Data.sections) {
+        $Data | Add-Member -MemberType NoteProperty -Name sections -Value @()
+    }
+
+    $normalized = @()
+    $existingIds = @{}
+
+    foreach ($section in @($Data.sections)) {
+        $title = ""
+        $titleProp = $section.PSObject.Properties["title"]
+        if ($null -ne $titleProp) {
+            $title = [string]$titleProp.Value
+        }
+        if ([string]::IsNullOrWhiteSpace($title)) {
+            $title = "未命名分类"
+        }
+        else {
+            $title = $title.Trim()
+        }
+
+        $rawId = ""
+        $idProp = $section.PSObject.Properties["id"]
+        if ($null -ne $idProp) {
+            $rawId = [string]$idProp.Value
+        }
+        if ([string]::IsNullOrWhiteSpace($rawId)) {
+            $rawId = $title
+        }
+
+        $id = Get-SafeSectionId -InputText $rawId
+        $baseId = $id
+        $suffix = 2
+        while ($existingIds.ContainsKey($id)) {
+            $id = "$baseId-$suffix"
+            $suffix++
+        }
+        $existingIds[$id] = $true
+
+        $enabled = $true
+        $enabledProp = $section.PSObject.Properties["enabled"]
+        if ($null -ne $enabledProp) {
+            $enabled = [bool]$enabledProp.Value
+        }
+
+        $order = 0
+        $orderProp = $section.PSObject.Properties["order"]
+        if ($null -ne $orderProp) {
+            $order = [int]$orderProp.Value
+        }
+        if ($order -le 0) {
+            $order = ($normalized.Count + 1)
+        }
+
+        $description = ""
+        $descriptionProp = $section.PSObject.Properties["description"]
+        if ($null -ne $descriptionProp) {
+            $description = [string]$descriptionProp.Value
+        }
+
+        $cover = "./asset/image/cards/1.png"
+        $coverProp = $section.PSObject.Properties["cover"]
+        if ($null -ne $coverProp -and -not [string]::IsNullOrWhiteSpace([string]$coverProp.Value)) {
+            $cover = Normalize-RelativePath -PathText ([string]$coverProp.Value)
+        }
+
+        $normalized += [pscustomobject]@{
+            id          = $id
+            enabled     = $enabled
+            order       = $order
+            title       = $title
+            description = $description
+            cover       = $cover
+        }
+    }
+
+    if ($normalized.Count -eq 0) {
+        $normalized += [pscustomobject]@{
+            id          = "projects"
+            enabled     = $true
+            order       = 1
+            title       = "项目板块"
+            description = "进入项目合集并跳转到不同站点"
+            cover       = "./asset/image/cards/pickup-card.jpg"
+        }
+        $normalized += [pscustomobject]@{
+            id          = "author"
+            enabled     = $true
+            order       = 2
+            title       = "关于作者板块"
+            description = "进入作者相关页面与内容索引"
+            cover       = "./asset/image/cards/author-card.png"
+        }
+    }
+
+    $sortedSections = @($normalized | Sort-Object order, title)
     $counter = 1
-    foreach ($item in $sorted) {
-        $item.order = $counter
+    foreach ($section in $sortedSections) {
+        $section.order = $counter
         $counter++
     }
-    $Data.items = $sorted
+    $Data.sections = $sortedSections
+
+    $defaultSectionId = [string]$Data.sections[0].id
+    $validIds = @{}
+    foreach ($section in @($Data.sections)) {
+        $validIds[[string]$section.id] = $true
+    }
+
+    foreach ($item in @($Data.items)) {
+        $sectionIdProp = $item.PSObject.Properties["sectionId"]
+        if ($null -eq $sectionIdProp) {
+            $item | Add-Member -MemberType NoteProperty -Name sectionId -Value $defaultSectionId
+            continue
+        }
+
+        $candidate = Get-SafeSectionId -InputText ([string]$sectionIdProp.Value)
+        if ([string]::IsNullOrWhiteSpace($candidate) -or -not $validIds.ContainsKey($candidate)) {
+            $item.sectionId = $defaultSectionId
+        }
+        else {
+            $item.sectionId = $candidate
+        }
+    }
+}
+
+function Get-DefaultSectionId {
+    param([object]$Data)
+
+    Normalize-Sections -Data $Data
+    return [string]$Data.sections[0].id
+}
+
+function Get-SectionTitle {
+    param(
+        [object]$Data,
+        [string]$SectionId
+    )
+
+    foreach ($section in @($Data.sections)) {
+        if ([string]$section.id -eq $SectionId) {
+            return [string]$section.title
+        }
+    }
+    return "未分组"
+}
+
+function Get-NextItemOrderForSection {
+    param(
+        [object]$Data,
+        [string]$SectionId
+    )
+
+    $maxOrder = 0
+    foreach ($item in @($Data.items | Where-Object { [string]$_.sectionId -eq $SectionId })) {
+        if ([int]$item.order -gt $maxOrder) {
+            $maxOrder = [int]$item.order
+        }
+    }
+    return ($maxOrder + 1)
 }
 
 function Get-LayoutLabel {
@@ -178,6 +368,20 @@ function Get-SafeSlug {
     $candidate = ($InputText.Trim().ToLower() -replace '[^a-z0-9\-]', '-').Trim('-')
     if ([string]::IsNullOrWhiteSpace($candidate)) {
         $candidate = "item-" + (Get-Date -Format "yyyyMMddHHmmss")
+    }
+    return $candidate
+}
+
+function Get-SafeSectionId {
+    param([string]$InputText)
+
+    if ([string]::IsNullOrWhiteSpace($InputText)) {
+        return "section-" + (Get-Date -Format "yyyyMMddHHmmss")
+    }
+
+    $candidate = ($InputText.Trim().ToLower() -replace '[^\p{L}\p{Nd}\-_]', '-').Trim('-')
+    if ([string]::IsNullOrWhiteSpace($candidate)) {
+        $candidate = "section-" + (Get-Date -Format "yyyyMMddHHmmss")
     }
     return $candidate
 }
@@ -368,15 +572,49 @@ $paragraphHtml
 function Build-Site {
     param([object]$Data)
 
+    Normalize-Sections -Data $Data
     Normalize-ItemsOrder -Data $Data
-    $enabledItems = @($Data.items | Where-Object { $_.enabled } | Sort-Object order)
+    $enabledSections = @($Data.sections | Where-Object { $_.enabled } | Sort-Object order)
+    if ($enabledSections.Count -eq 0) {
+        $enabledSections = @($Data.sections | Sort-Object order)
+    }
+
+    $enabledItems = @()
+    foreach ($section in $enabledSections) {
+        $sectionEnabledItems = @(
+            $Data.items |
+            Where-Object { $_.enabled -and [string]$_.sectionId -eq [string]$section.id } |
+            Sort-Object order, cardTitle
+        )
+        $enabledItems += $sectionEnabledItems
+    }
 
     $cardLines = @()
     foreach ($item in $enabledItems) {
         $link = Get-ItemPageRelativePath -Item $item
         $cardLines += "  { title: $(To-JsString([string]$item.cardTitle)), image: $(To-JsString([string]$item.cardImage)), link: $(To-JsString($link)), alt: $(To-JsString([string]$item.cardAlt)) }"
     }
-    $configRaw = "const CARDS = [`r`n" + ($cardLines -join ",`r`n") + "`r`n];`r`n"
+
+    $sectionLines = @()
+    foreach ($section in $enabledSections) {
+        $sectionItems = @($enabledItems | Where-Object { [string]$_.sectionId -eq [string]$section.id } | Sort-Object order)
+        $sectionCardLines = @()
+        foreach ($item in $sectionItems) {
+            $link = Get-ItemPageRelativePath -Item $item
+            $sectionCardLines += "      { title: $(To-JsString([string]$item.cardTitle)), image: $(To-JsString([string]$item.cardImage)), link: $(To-JsString($link)), alt: $(To-JsString([string]$item.cardAlt)) }"
+        }
+
+        $sectionCardsJs = if ($sectionCardLines.Count -eq 0) {
+            "[]"
+        }
+        else {
+            "[`r`n" + ($sectionCardLines -join ",`r`n") + "`r`n    ]"
+        }
+
+        $sectionLines += "  { id: $(To-JsString([string]$section.id)), title: $(To-JsString([string]$section.title)), description: $(To-JsString([string]$section.description)), cover: $(To-JsString([string]$section.cover)), cards: $sectionCardsJs }"
+    }
+
+    $configRaw = "const CARDS = [`r`n" + ($cardLines -join ",`r`n") + "`r`n];`r`n`r`nconst HOME_SECTIONS = [`r`n" + ($sectionLines -join ",`r`n") + "`r`n];`r`n"
     Set-Content -Encoding utf8 -LiteralPath $paths.ConfigFile -Value $configRaw
 
     Update-IndexTitles -Data $Data
@@ -418,7 +656,7 @@ function Build-Site {
         }
     }
 
-    Write-Host "已完成一键发布：共生成 $($enabledItems.Count) 个轮播卡片，$($expectedFiles.Count) 个内容页面。" -ForegroundColor Green
+    Write-Host "已完成一键发布：共生成 $($enabledSections.Count) 个分类板块，$($enabledItems.Count) 个轮播卡片，$($expectedFiles.Count) 个内容页面。" -ForegroundColor Green
 }
 
 function Save-And-Build {
@@ -426,6 +664,7 @@ function Save-And-Build {
         [object]$Data,
         [string]$Reason
     )
+    Normalize-Sections -Data $Data
     Normalize-ItemsOrder -Data $Data
     Save-SiteData -Data $Data -Reason $Reason
     Build-Site -Data $Data
@@ -445,7 +684,9 @@ function Prompt-WithDefault {
 
 function Show-Items {
     param([object]$Data)
-    $items = @($Data.items | Sort-Object order)
+    Normalize-Sections -Data $Data
+    Normalize-ItemsOrder -Data $Data
+    $items = @($Data.items)
     if ($items.Count -eq 0) {
         Write-Host "当前没有任何内容。" -ForegroundColor Yellow
         return
@@ -456,7 +697,8 @@ function Show-Items {
     foreach ($item in $items) {
         $stateText = if ($item.enabled) { "显示中" } else { "已隐藏" }
         $layoutText = Get-LayoutLabel -Layout ([string]$item.pageLayout)
-        Write-Host "[$index] $($item.cardTitle) | slug=$($item.pageSlug) | 排版=$layoutText | 状态=$stateText"
+        $sectionTitle = Get-SectionTitle -Data $Data -SectionId ([string]$item.sectionId)
+        Write-Host "[$index] $($item.cardTitle) | 分类=$sectionTitle | slug=$($item.pageSlug) | 排版=$layoutText | 状态=$stateText"
         $index++
     }
     Write-Host ""
@@ -464,7 +706,9 @@ function Show-Items {
 
 function Select-Item {
     param([object]$Data)
-    $items = @($Data.items | Sort-Object order)
+    Normalize-Sections -Data $Data
+    Normalize-ItemsOrder -Data $Data
+    $items = @($Data.items)
     if ($items.Count -eq 0) {
         Write-Host "当前没有可操作内容。" -ForegroundColor Yellow
         return $null
@@ -557,15 +801,13 @@ function Add-ItemFlow {
     $cardAlt = Read-Host "8/8 请输入图片说明 alt（回车默认同卡片标题）"
     if ([string]::IsNullOrWhiteSpace($cardAlt)) { $cardAlt = $cardTitle }
 
-    $maxOrder = 0
-    foreach ($item in @($Data.items)) {
-        if ([int]$item.order -gt $maxOrder) { $maxOrder = [int]$item.order }
-    }
+    $defaultSectionId = Get-DefaultSectionId -Data $Data
 
     $newItem = [pscustomobject]@{
         id          = $slug
+        sectionId   = $defaultSectionId
         enabled     = $true
-        order       = ($maxOrder + 1)
+        order       = (Get-NextItemOrderForSection -Data $Data -SectionId $defaultSectionId)
         cardTitle   = $cardTitle
         cardImage   = (Normalize-RelativePath -PathText $cardImage)
         cardAlt     = $cardAlt
@@ -636,15 +878,13 @@ function Add-LocalHtmlFlow {
         Copy-Item -LiteralPath $resolved.path -Destination $targetFull -Force
     }
 
-    $maxOrder = 0
-    foreach ($item in @($Data.items)) {
-        if ([int]$item.order -gt $maxOrder) { $maxOrder = [int]$item.order }
-    }
+    $defaultSectionId = Get-DefaultSectionId -Data $Data
 
     $newItem = [pscustomobject]@{
         id          = $slug
+        sectionId   = $defaultSectionId
         enabled     = $true
-        order       = ($maxOrder + 1)
+        order       = (Get-NextItemOrderForSection -Data $Data -SectionId $defaultSectionId)
         cardTitle   = $cardTitle
         cardImage   = (Normalize-RelativePath -PathText $cardImage)
         cardAlt     = $cardAlt
@@ -698,15 +938,13 @@ function Add-ExternalLinkFlow {
     $cardAlt = Read-Host "5/5 请输入图片说明 alt（回车默认同卡片标题）"
     if ([string]::IsNullOrWhiteSpace($cardAlt)) { $cardAlt = $cardTitle }
 
-    $maxOrder = 0
-    foreach ($item in @($Data.items)) {
-        if ([int]$item.order -gt $maxOrder) { $maxOrder = [int]$item.order }
-    }
+    $defaultSectionId = Get-DefaultSectionId -Data $Data
 
     $newItem = [pscustomobject]@{
         id          = $slug
+        sectionId   = $defaultSectionId
         enabled     = $true
-        order       = ($maxOrder + 1)
+        order       = (Get-NextItemOrderForSection -Data $Data -SectionId $defaultSectionId)
         cardTitle   = $cardTitle
         cardImage   = (Normalize-RelativePath -PathText $cardImage)
         cardAlt     = $cardAlt

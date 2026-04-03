@@ -321,6 +321,48 @@ body {
   z-index: 2;
 }
 
+.section-back-btn {
+  position: absolute;
+  left: max(14px, env(safe-area-inset-left, 0px));
+  top: clamp(108px, 20vh, 186px);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid #171717;
+  background: #fff;
+  color: #171717;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.94);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.28s ease, color 0.28s ease;
+}
+
+.section-back-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.section-back-btn.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.section-back-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.section-back-icon {
+  width: 28px;
+  height: 28px;
+}
+
 .btn-group .btn {
   width: 60px;
   height: 60px;
@@ -606,6 +648,19 @@ body {
     z-index: 4;
   }
 
+  .section-back-btn {
+    position: fixed;
+    left: max(10px, env(safe-area-inset-left, 0px));
+    top: clamp(96px, 18vh, 148px);
+    width: 50px;
+    height: 50px;
+  }
+
+  .section-back-icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .btn-group .btn {
     width: 54px;
     height: 54px;
@@ -735,7 +790,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .startup-splash,
   .startup-video,
-  .startup-progress-fill {
+  .startup-progress-fill,
+  .section-back-btn {
     transition-duration: 0.01ms !important;
   }
 }

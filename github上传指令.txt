@@ -1,23 +1,48 @@
-cd C:\Users\28389\Desktop\mypickapps\webs\mysite
+# 一键上传到 GitHub: smartlotus/lotussblog
+# 在 PowerShell 里直接运行
 
-# 1) 退出可能残留的 rebase 状态
-git rebase --abort 2>$null
+$RepoPath  = "C:\Users\28389\Desktop\myprojects\mypickapps\webs\mysite"
+$RemoteUrl = "https://github.com/smartlotus/lotussblog.git"
+$Branch    = "main"
 
-# 2) 回到远端 main，保留你本地改动（重做一次干净提交）
-git fetch origin
-git reset --soft origin/main
+Set-Location $RepoPath
 
-# 3) 忽略构建产物（防止以后再提交超大文件）
-@"
-dist/SiteManagerUI/
-tools/SiteManagerUI/bin/
-tools/SiteManagerUI/obj/
-"@ | Add-Content .gitignore
+# 1) 初始化仓库（如果还没初始化）
+if (-not (Test-Path ".git")) {
+  git init
+}
 
-# 4) 从索引移除大文件/构建目录（本地文件不会被删除）
-git rm -r --cached --ignore-unmatch dist/SiteManagerUI tools/SiteManagerUI/bin tools/SiteManagerUI/obj
+# 2) 绑定/更新远程仓库
+$remotes = git remote
+if ($remotes -contains "origin") {
+  git remote set-url origin $RemoteUrl
+} else {
+  git remote add origin $RemoteUrl
+}
 
-# 5) 重新提交并推送
+# 3) 切到 main（不存在就创建）
+git checkout $Branch 2>$null
+if ($LASTEXITCODE -ne 0) {
+  git checkout -b $Branch
+}
+
+# 4) 提交本地改动
 git add -A
-git commit -m "sync site (exclude large build artifacts)"
-git push --force-with-lease origin main
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) {
+  $msg = "sync site " + (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+  git commit -m $msg
+} else {
+  Write-Host "没有可提交的改动。"
+}
+
+# 5) 同步远端并推送
+git pull --rebase origin $Branch
+if ($LASTEXITCODE -ne 0) {
+  Write-Host "pull --rebase 失败（可能有冲突），请先解决冲突后再 push。" -ForegroundColor Yellow
+  exit 1
+}
+
+git push -u origin $Branch
+
+Write-Host "已推送到 $RemoteUrl 的 $Branch 分支。Cloudflare 会自动开始同步部署。"
