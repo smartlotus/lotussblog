@@ -11,11 +11,11 @@
   { title: "kindle_page", image: "./asset/image/cards/kindle-page-card.jpg", link: "https://kindle-page-web.pages.dev/", alt: "kindle_page" },
   { title: "Redegg", image: "./asset/image/cards/redegg-card.png", link: "https://redegg.pages.dev/", alt: "Redegg" },
   { title: "pickmark", image: "./asset/image/cards/pickmark-card.png", link: "https://pickmarksweb.pages.dev/", alt: "pickmark" },
-  { title: "Mindstream", image: "./asset/image/cards/mindstream-card.png", link: "https://lotussmindstream.pages.dev/", alt: "Mindstream" },
-  { title: "Insight", image: "./asset/image/cards/insight-card.png", link: "https://lotussinsight.pages.dev/", alt: "Insight" },
-  { title: "mymusic", image: "./asset/image/cards/mymusic-card.png", link: "https://mymusic-6q3.pages.dev/", alt: "mymusic" },
   { title: "myvedio", image: "./asset/image/cards/myvedio-card.png", link: "https://myvedio.pages.dev/", alt: "myvedio" },
-  { title: "writings", image: "./asset/image/cards/writings-card.png", link: "https://writings-793.pages.dev/", alt: "writings" }
+  { title: "mymusic", image: "./asset/image/cards/mymusic-card.png", link: "https://mymusic-6q3.pages.dev/", alt: "mymusic" },
+  { title: "writings", image: "./asset/image/cards/writings-card.png", link: "https://writings-793.pages.dev/", alt: "writings" },
+  { title: "Insight", image: "./asset/image/cards/insight-card.png", link: "https://lotussinsight.pages.dev/", alt: "Insight" },
+  { title: "Mindstream", image: "./asset/image/cards/mindstream-card.png", link: "https://lotussmindstream.pages.dev/", alt: "Mindstream" }
 ];
 
 const HOME_SECTIONS = [
@@ -40,11 +40,11 @@ const HOME_SECTIONS = [
       { title: "pickmark", image: "./asset/image/cards/pickmark-card.png", link: "https://pickmarksweb.pages.dev/", alt: "pickmark" }
     ] },
   { id: "funny-staffs", title: "funny_staffs", description: "", cover: "./asset/image/cards/funny-staffs-section.jpg", cards: [
-      { title: "Mindstream", image: "./asset/image/cards/mindstream-card.png", link: "https://lotussmindstream.pages.dev/", alt: "Mindstream" },
-      { title: "Insight", image: "./asset/image/cards/insight-card.png", link: "https://lotussinsight.pages.dev/", alt: "Insight" },
-      { title: "mymusic", image: "./asset/image/cards/mymusic-card.png", link: "https://mymusic-6q3.pages.dev/", alt: "mymusic" },
       { title: "myvedio", image: "./asset/image/cards/myvedio-card.png", link: "https://myvedio.pages.dev/", alt: "myvedio" },
-      { title: "writings", image: "./asset/image/cards/writings-card.png", link: "https://writings-793.pages.dev/", alt: "writings" }
+      { title: "mymusic", image: "./asset/image/cards/mymusic-card.png", link: "https://mymusic-6q3.pages.dev/", alt: "mymusic" },
+      { title: "writings", image: "./asset/image/cards/writings-card.png", link: "https://writings-793.pages.dev/", alt: "writings" },
+      { title: "Insight", image: "./asset/image/cards/insight-card.png", link: "https://lotussinsight.pages.dev/", alt: "Insight" },
+      { title: "Mindstream", image: "./asset/image/cards/mindstream-card.png", link: "https://lotussmindstream.pages.dev/", alt: "Mindstream" }
     ] }
 ];
 
